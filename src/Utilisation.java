@@ -14,7 +14,7 @@ public class Utilisation {
         float temp;
         try (Stream<String> lines = Files.lines(Paths.get("userData"))) {
             line = lines.skip(n).findFirst().get();
-            temp = MT/Float.valueOf(line);
+            temp = MT/Float.valueOf(line); //Calculation to find the fuel consumption
             return(temp);
         } catch (IOException e) {
             System.out.println(e);
@@ -22,7 +22,7 @@ public class Utilisation {
         return(0);
     }
 
-    public static void carOutOfFuel(Settings car){
+    public static void carOutOfFuel(Settings car){ //Resets the fuel tank of the car
         float remainder = car.getFuelTank();
         int n = 3; // The line number for the max capacity of the fuel tank
         String line;
@@ -49,7 +49,7 @@ public class Utilisation {
 
 
 
-    public static float costCalculator(Settings car){
+    public static float costCalculator(Settings car){ //Calculates the cost of a full refuel
         float total = car.getPrices() * car.getFuelTank(); //Multiplies the cost per gallon by the capacity of fuel tank to find the cost for a full refuel
         return total;
     }
@@ -59,7 +59,7 @@ public class Utilisation {
         return total;
     }
 
-    public static boolean refuelCheck(ArrayList<String> passer){
+    public static boolean refuelCheck(ArrayList<String> passer){ //Checks if a refuel was done by reading the file
         boolean returnValue;
         if(FileUtilisation.returnFromFile(passer, 6).equals("true")){
             returnValue = true;
@@ -69,14 +69,14 @@ public class Utilisation {
         return returnValue;
     }
 
-    public static float costOverTime(Settings car, Calendar calendar, ArrayList<String> passer){
+    public static float costOverTime(Settings car, Calendar calendar, ArrayList<String> passer){ //Calculates the cost over time
         float total = 0;
         for(int i = 0; i<7; i++){
             passer = new ArrayList<>(); //resets Passer at the start of each loop
             calendar.add(Calendar.DATE, -1);
             passer.add(String.valueOf((calendar.get(Calendar.DAY_OF_MONTH))));
             passer.add(String.valueOf((calendar.get(Calendar.MONTH)) + 1));
-            passer.add(String.valueOf(calendar.get(Calendar.YEAR)));
+            passer.add(String.valueOf(calendar.get(Calendar.YEAR))); //Adds the date to passer so it can be read later
             if (Utilisation.refuelCheck(passer)) { //checks if the index at 5 has a value, and if it does it carries out the following as there was a refuel
                 if (FileUtilisation.returnFromFile(passer, 6).equals("true")) { //checks if index 6 is true. If it is then there's a remainder in index 7, which it will then pass through to the cost calculator
                     float remainderInTank = Float.valueOf((String) FileUtilisation.returnFromFile(passer, 7)); //Casts the returned value to a string so it can then be converted into a float.
@@ -101,7 +101,7 @@ public class Utilisation {
         return total;
     }
 
-    public static float costOverTime(Settings car, Calendar calendar, ArrayList<String> passer, int repeats){
+    public static float costOverTime(Settings car, Calendar calendar, ArrayList<String> passer, int repeats){ //Slight variation of the above that uses inputted repeats
         float total = 0;
         int day = calendar.get(Calendar.DAY_OF_MONTH);
         calendar.add(Calendar.DATE, -(day));//sets the calendar back to the start of the month
@@ -136,7 +136,7 @@ public class Utilisation {
         return(total);
     }
 
-    public static float costOverWeek(Settings car, Calendar calendar, ArrayList<String> passer){
+    public static float costOverWeek(Settings car, Calendar calendar, ArrayList<String> passer){ //Slight variation for choice=4
         float total = 0;
         for(int i = 0; i<7; i++){
             passer = new ArrayList<>(); //resets Passer at the start of each loop

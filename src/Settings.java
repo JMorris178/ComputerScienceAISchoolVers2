@@ -1,5 +1,5 @@
 public class Settings {
-    //defines the 3 main variables that can be changed via the settings menu
+    //defines the 4 main variables that can be changed via the settings menu
     float MPG;
     float fuelTank;
     float prices;

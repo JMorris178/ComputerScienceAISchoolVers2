@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 import static java.lang.Float.parseFloat;
 
-public class InitialSetup {
+public class InitialSetup { //Checks to see if a file exists, but if it doesn't it runs a setup process to make sure the program works.
     public static void createNewFile(Settings car){
         Scanner input = new Scanner(System.in);
         ArrayList<Float> tempToAddToFile = new ArrayList<>(); //allows the program to push the settings data to the file if needed
@@ -20,7 +20,7 @@ public class InitialSetup {
                 float tempFuelTank = input.nextFloat();
                 System.out.println("What is the current cost of fuel?");
                 float tempFuelCost = input.nextFloat();
-                tempToAddToFile.add(tempMPG);
+                tempToAddToFile.add(tempMPG); //adds these to the file.
                 tempToAddToFile.add(tempFuelTank);
                 tempToAddToFile.add(tempFuelCost);
                 for (int i = 0; i < 3; i++){ //Loop allows each part of the users input to be added to the database
@@ -32,7 +32,7 @@ public class InitialSetup {
             } else {
                 System.out.println("File exists"); //If the file exists.
             }
-            //Now the file is set up (or it already exists), the different settings are saved to the constructor
+            //Now the file is set up (or it already exists), the different settings are saved to the constructor which have been saved in the file
             String tempPassMPG = String.valueOf(FileUtilisation.readFromFile(0));
             String tempPassFuelTank = String.valueOf(FileUtilisation.readFromFile(1));
             String tempPassFuelCost = String.valueOf(FileUtilisation.readFromFile(2));

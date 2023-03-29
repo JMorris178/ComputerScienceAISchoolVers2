@@ -119,7 +119,7 @@ public class FileUtilisation {
             }
             file.close();
 
-            // write the new string with the replaced line OVER the same file
+            //writes the new string with the replaced line over the same file
             FileOutputStream fileOut = new FileOutputStream("userData");
             fileOut.write(inputBuffer.toString().getBytes());
             fileOut.close();
