@@ -1,4 +1,5 @@
 import java.io.*;
+import java.lang.reflect.Array;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Calendar;
@@ -165,6 +166,34 @@ public class Utilisation {
             }
         }
         return total;
+    }
+
+    public static void sortingAlgorithm(ArrayList<String> passer){ //Reads through each element in the file, compares the year first, then the month, then the day in passer. Will then rewrite the file and slot in the record in the appropriate place
+        boolean repeat = true;
+        int numLines =  FileUtilisation.countLines();
+        int linePos = 4; //Position of the line where the new record will go. Set to 4 by default as that's the highest it could be
+        String linePasser;
+        int count = 4; //Starts on 4 so it skips the first 4 non record items in the file
+        while(repeat == true){
+            linePasser = ((String) FileUtilisation.readFromFile(count));
+            String[] parts = linePasser.split(", "); //puts the parts of the line read into the list parts
+            System.out.println(parts[0]);//reads in the line from the file and saves it to the arrayList line
+            //Compares the two years of the two records, if they're the same then it checks the months
+            if(Float.valueOf(passer.get(2))>Float.valueOf(parts[2])){ //converts from String to Float so they can be compared
+
+            }
+
+
+
+
+            count++;
+            if(count>=numLines){
+                repeat = false;
+            }
+
+
+        }
+
     }
 
 }

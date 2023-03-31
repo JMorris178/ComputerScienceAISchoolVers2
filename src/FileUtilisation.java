@@ -30,14 +30,17 @@ public class FileUtilisation {
         }
     }
 
-    public static Object readFromFile() { //General code to read all the lines from the file
+    public static int countLines() { //General code to read all the lines from the file and count them
         try {
+            int count = 0;
             FileReader fr = new FileReader("userData");
             BufferedReader br = new BufferedReader(fr);
             String line = br.readLine();
             while (line != null) {
                 line = br.readLine();
+                count++;
             }
+            return(count);
         } catch (IOException e) {
             e.printStackTrace();
         }
