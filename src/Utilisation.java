@@ -179,8 +179,12 @@ public class Utilisation {
             String[] parts = linePasser.split(", "); //puts the parts of the line read into the list parts
             System.out.println(parts[0]);//reads in the line from the file and saves it to the arrayList line
             //Compares the two years of the two records, if they're the same then it checks the months
-            if(Float.valueOf(passer.get(2))>Float.valueOf(parts[2])){ //converts from String to Float so they can be compared
-
+            if(Float.parseFloat(passer.get(2))>Float.parseFloat(parts[2])){ //converts from String to Float so they can be compared
+                if(Float.parseFloat(passer.get(1))>Float.parseFloat(parts[1])){
+                    if(Float.parseFloat(passer.get(0))>Float.parseFloat(parts[0])){
+                        FileUtilisation.InsertLines(count,passer); //inserts the line where it should be in the order
+                    }
+                }
             }
 
 
