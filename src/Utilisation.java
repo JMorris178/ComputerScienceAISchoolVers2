@@ -171,17 +171,22 @@ public class Utilisation {
     public static void sortingAlgorithm(ArrayList<String> passer){ //Reads through each element in the file, compares the year first, then the month, then the day in passer. Will then rewrite the file and slot in the record in the appropriate place
         boolean repeat = true;
         int numLines =  FileUtilisation.countLines();
-        int linePos = 4; //Position of the line where the new record will go. Set to 4 by default as that's the highest it could be
         String linePasser;
         int count = 4; //Starts on 4 so it skips the first 4 non record items in the file
         while(repeat == true){
             linePasser = ((String) FileUtilisation.readFromFile(count));
             String[] parts = linePasser.split(", "); //puts the parts of the line read into the list parts
             System.out.println(parts[0]);//reads in the line from the file and saves it to the arrayList line
+            int floatPasser = Integer.parseInt(passer.get(0));
+            float floatPasser2 = Float.parseFloat(parts[0]);
             //Compares the two years of the two records, if they're the same then it checks the months
-            if(Float.parseFloat(passer.get(2))>Float.parseFloat(parts[2])){ //converts from String to Float so they can be compared
-                if(Float.parseFloat(passer.get(1))>Float.parseFloat(parts[1])){
-                    if(Float.parseFloat(passer.get(0))>Float.parseFloat(parts[0])){
+            if(floatPasser>floatPasser2){ //converts from String to Float so they can be compared
+                floatPasser = Integer.parseInt(passer.get(1));
+                floatPasser2 = Float.parseFloat(parts[1]);
+                if(Float.parseFloat(passer.get(1))>floatPasser){
+                    floatPasser = Integer.parseInt(passer.get(2));
+                    floatPasser2 = Float.parseFloat(parts[2]);
+                    if(Float.parseFloat(passer.get(2))>floatPasser){
                         FileUtilisation.InsertLines(count,passer); //inserts the line where it should be in the order
                     }
                 }

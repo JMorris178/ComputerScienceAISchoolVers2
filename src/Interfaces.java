@@ -103,7 +103,7 @@ public class Interfaces {
                     int lineNum = FileUtilisation.findLineNum(passer);
                     FileUtilisation.replaceLines((lineNum + 1), record); //replaces the line that had the same date originally.
                 } else {
-                    FileUtilisation.addToFile(record);
+                    Utilisation.sortingAlgorithm(record);
                 }
 
 
@@ -163,7 +163,7 @@ public class Interfaces {
                     int lineNum = FileUtilisation.findLineNum(passer);
                     FileUtilisation.replaceLines((lineNum + 1), record); //replaces the line that had the same date originally.
                 } else {
-                    FileUtilisation.addToFile(record);
+                    Utilisation.sortingAlgorithm(record);;
                 }
 
 
