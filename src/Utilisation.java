@@ -168,7 +168,7 @@ public class Utilisation {
         return total;
     }
 
-    public static void sortingAlgorithm(ArrayList<String> passer){ //Reads through each element in the file, compares the year first, then the month, then the day in passer. Will then rewrite the file and slot in the record in the appropriate place
+    public static void sortingAlgorithm(ArrayList<Integer> passer){ //Reads through each element in the file, compares the year first, then the month, then the day in passer. Will then rewrite the file and slot in the record in the appropriate place
         boolean repeat = true;
         int numLines =  FileUtilisation.countLines();
         String linePasser;
@@ -176,17 +176,16 @@ public class Utilisation {
         while(repeat == true){
             linePasser = ((String) FileUtilisation.readFromFile(count));
             String[] parts = linePasser.split(", "); //puts the parts of the line read into the list parts
-            System.out.println(parts[0]);//reads in the line from the file and saves it to the arrayList line
-            int floatPasser = Integer.parseInt(passer.get(0));
-            float floatPasser2 = Float.parseFloat(parts[0]);
+            Integer floatPasser = passer.get(2); //Starts as a string
+            Integer floatPasser2 = Integer.parseInt(parts[2]);
             //Compares the two years of the two records, if they're the same then it checks the months
-            if(floatPasser>floatPasser2){ //converts from String to Float so they can be compared
-                floatPasser = Integer.parseInt(passer.get(1));
-                floatPasser2 = Float.parseFloat(parts[1]);
-                if(Float.parseFloat(passer.get(1))>floatPasser){
-                    floatPasser = Integer.parseInt(passer.get(2));
-                    floatPasser2 = Float.parseFloat(parts[2]);
-                    if(Float.parseFloat(passer.get(2))>floatPasser){
+            if(floatPasser<floatPasser2){ //converts from String to Float so they can be compared
+                floatPasser = passer.get(1);
+                floatPasser2 = Integer.parseInt(parts[1]);
+                if(floatPasser<floatPasser2){
+                    floatPasser = passer.get(0);
+                    floatPasser2 = Integer.parseInt(parts[0]);
+                    if(floatPasser<floatPasser2){
                         FileUtilisation.InsertLines(count,passer); //inserts the line where it should be in the order
                     }
                 }

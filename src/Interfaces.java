@@ -41,6 +41,7 @@ public class Interfaces {
             //All the necessary variables are defined here so they're reset at the start of each cycle
             Scanner userInput = new Scanner(System.in);
             ArrayList record = new ArrayList<>();
+            ArrayList sortingPasser = new ArrayList<>(); //Passer specifically for sorting
             ArrayList<String> passer = new ArrayList<>(); //creates a new arraylist to pass data through that isn't the records
             int choice = userInput.nextInt();
             boolean refillRequired = false;
@@ -56,6 +57,9 @@ public class Interfaces {
                 record.add(calendar.get(Calendar.DAY_OF_MONTH)); //uses calendar to get the date automatically.
                 record.add((calendar.get(Calendar.MONTH)) + 1);
                 record.add(calendar.get(Calendar.YEAR));
+                sortingPasser.add(calendar.get(Calendar.DAY_OF_MONTH)); //uses calendar to get the date automatically.
+                sortingPasser.add((calendar.get(Calendar.MONTH)) + 1);
+                sortingPasser.add(calendar.get(Calendar.YEAR));
                 for (int i = 0; i < 3; i++) {
                     passer.add(String.valueOf(record.get(i))); //converts the date into strings and adds them to passer for later checks
                 }
@@ -103,7 +107,7 @@ public class Interfaces {
                     int lineNum = FileUtilisation.findLineNum(passer);
                     FileUtilisation.replaceLines((lineNum + 1), record); //replaces the line that had the same date originally.
                 } else {
-                    Utilisation.sortingAlgorithm(record);
+                    Utilisation.sortingAlgorithm(sortingPasser);
                 }
 
 
@@ -117,6 +121,9 @@ public class Interfaces {
                 record.add(day);
                 record.add(month);
                 record.add(year);
+                sortingPasser.add(day);
+                sortingPasser.add(month);
+                sortingPasser.add(year);
                 for (int i = 0; i < 3; i++) {
                     passer.add(String.valueOf(record.get(i))); //converts the date into strings and adds them to passer for later checks
                 }
@@ -163,7 +170,7 @@ public class Interfaces {
                     int lineNum = FileUtilisation.findLineNum(passer);
                     FileUtilisation.replaceLines((lineNum + 1), record); //replaces the line that had the same date originally.
                 } else {
-                    Utilisation.sortingAlgorithm(record);;
+                    Utilisation.sortingAlgorithm(sortingPasser);;
                 }
 
 
