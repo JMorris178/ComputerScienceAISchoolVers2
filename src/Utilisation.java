@@ -179,21 +179,21 @@ public class Utilisation {
             Integer floatPasser = passer.get(2); //Starts as a string
             Integer floatPasser2 = Integer.parseInt(parts[2]);
             //Compares the two years of the two records, if they're the same then it checks the months
-            if(floatPasser<floatPasser2){ //converts from String to Float so they can be compared
+            if(floatPasser<floatPasser2) { //if the year is less than the year in the next section, you know it's less than it so you can swap it
+                FileUtilisation.InsertLines(count,passer);
+            }else if(floatPasser == floatPasser2){ //if it's equal year, it can still be smaller but further steps need to be taken to check
                 floatPasser = passer.get(1);
                 floatPasser2 = Integer.parseInt(parts[1]);
                 if(floatPasser<floatPasser2){
+                    FileUtilisation.InsertLines(count,passer);
+                }else if(floatPasser == floatPasser2){
                     floatPasser = passer.get(0);
                     floatPasser2 = Integer.parseInt(parts[0]);
-                    if(floatPasser<floatPasser2){
+                    if(floatPasser<floatPasser2){ //It will only need to be swapped if it's smaller - an equal date would have been picked up by now so nothing else is needed to be checked past this.
                         FileUtilisation.InsertLines(count,passer); //inserts the line where it should be in the order
                     }
                 }
             }
-
-
-
-
             count++;
             if(count>=numLines){
                 repeat = false;
