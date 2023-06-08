@@ -1,11 +1,9 @@
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Interfaces {
-    public static void settingsInterface(Settings car) {
+    public static void settingsInterface(Car car) {
         boolean repeat = true;
         while (repeat) {
             System.out.println("Do you want to change 1. The MPG, 2. The fuel tank capacity, or 3. The fuel cost? Type a number out of this range to return to the main menu.");
@@ -34,7 +32,7 @@ public class Interfaces {
         }
     }
 
-    public static void mileageCalcInterface(Calendar calendar, Settings car) {
+    public static void mileageCalcInterface(Calendar calendar, Car car) {
         boolean repeat = true;
         while (repeat) {
             System.out.println("Do you want to 1. Change the distance travelled today, 2. Change the distance travelled on another date, 3. view the data from today or 4, view the data from another day? Type a number out of this range to return to the main menu.");
@@ -211,7 +209,7 @@ public class Interfaces {
         }
     }
 
-    public static void budgetingSheetInterface(Settings car, Calendar calendar) {
+    public static void budgetingSheetInterface(Car car, Calendar calendar) {
         Scanner userInput = new Scanner(System.in);
         boolean repeat = true;
         while (repeat) {

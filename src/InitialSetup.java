@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import static java.lang.Float.parseFloat;
 
 public class InitialSetup { //Checks to see if a file exists, but if it doesn't it runs a setup process to make sure the program works.
-    public static void createNewFile(Settings car){
+    public static void createNewFile(Car car){
         Scanner input = new Scanner(System.in);
         ArrayList<Float> tempToAddToFile = new ArrayList<>(); //allows the program to push the settings data to the file if needed
         try {

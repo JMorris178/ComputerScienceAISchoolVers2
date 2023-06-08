@@ -1,10 +1,7 @@
 import java.io.*;
-import java.lang.reflect.Array;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Calendar;
-import java.util.List;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import java.util.ArrayList;
 
@@ -23,7 +20,7 @@ public class Utilisation {
         return(0);
     }
 
-    public static void carOutOfFuel(Settings car){ //Resets the fuel tank of the car
+    public static void carOutOfFuel(Car car){ //Resets the fuel tank of the car
         float remainder = car.getFuelTank();
         int n = 3; // The line number for the max capacity of the fuel tank
         String line;
@@ -36,7 +33,7 @@ public class Utilisation {
         }
     }
 
-    public static void carRefuel(Settings car) { //alternate version of CarOutOfFuel if the user refuels on not a full tank
+    public static void carRefuel(Car car) { //alternate version of CarOutOfFuel if the user refuels on not a full tank
         int n = 3; // The line number for the max capacity of the fuel tank
         String line;
         try (Stream<String> lines = Files.lines(Paths.get("userData"))) {
@@ -50,12 +47,12 @@ public class Utilisation {
 
 
 
-    public static float costCalculator(Settings car){ //Calculates the cost of a full refuel
+    public static float costCalculator(Car car){ //Calculates the cost of a full refuel
         float total = car.getPrices() * car.getFuelTank(); //Multiplies the cost per gallon by the capacity of fuel tank to find the cost for a full refuel
         return total;
     }
 
-    public static float costCalculator(Settings car, float remainderInTank){ //Alternate version of costCalculator if the user refueled while their tank wasn't empty
+    public static float costCalculator(Car car, float remainderInTank){ //Alternate version of costCalculator if the user refueled while their tank wasn't empty
         float total = car.getPrices() * (car.getFuelTank()-remainderInTank); //Multiplies the cost per gallon by the capacity of fuel tank with the remainder in the tank subtracted to find the cost for a full refuel
         return total;
     }
@@ -70,7 +67,7 @@ public class Utilisation {
         return returnValue;
     }
 
-    public static float costOverTime(Settings car, Calendar calendar, ArrayList<String> passer){ //Calculates the cost over time
+    public static float costOverTime(Car car, Calendar calendar, ArrayList<String> passer){ //Calculates the cost over time
         float total = 0;
         for(int i = 0; i<7; i++){
             passer = new ArrayList<>(); //resets Passer at the start of each loop
@@ -102,7 +99,7 @@ public class Utilisation {
         return total;
     }
 
-    public static float costOverTime(Settings car, Calendar calendar, ArrayList<String> passer, int repeats){ //Slight variation of the above that uses inputted repeats
+    public static float costOverTime(Car car, Calendar calendar, ArrayList<String> passer, int repeats){ //Slight variation of the above that uses inputted repeats
         float total = 0;
         int day = calendar.get(Calendar.DAY_OF_MONTH);
         calendar.add(Calendar.DATE, -(day));//sets the calendar back to the start of the month
@@ -137,7 +134,7 @@ public class Utilisation {
         return(total);
     }
 
-    public static float costOverWeek(Settings car, Calendar calendar, ArrayList<String> passer){ //Slight variation for choice=4
+    public static float costOverWeek(Car car, Calendar calendar, ArrayList<String> passer){ //Slight variation for choice=4
         float total = 0;
         for(int i = 0; i<7; i++){
             passer = new ArrayList<>(); //resets Passer at the start of each loop

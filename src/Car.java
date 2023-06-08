@@ -1,4 +1,4 @@
-public class Settings {
+public class Car {
     //defines the 4 main variables that can be changed via the settings menu
     float MPG;
     float fuelTank;
@@ -6,7 +6,7 @@ public class Settings {
     float maxCap;
 
 
-    public Settings(float MPG, float fuelTank, float prices, float maxCap){
+    public Car(float MPG, float fuelTank, float prices, float maxCap){
         this.MPG = MPG;
         this.fuelTank = fuelTank;
         this.prices = prices;

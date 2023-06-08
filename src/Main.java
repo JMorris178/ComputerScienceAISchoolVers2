@@ -4,7 +4,7 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         boolean repeat = true;
-        Settings car = new Settings(0,0,0, 0); //Sets up the constructor
+        Car car = new Car(0,0,0, 0); //Sets up the constructor
         InitialSetup.createNewFile(car); //Checks if the user has a file already. If they don't, it performs an initial set up
         Calendar calendar =  Calendar.getInstance(); //Sets up the calendar to today's date
         while (repeat) { //While loop used to repeat the core of the program over and over until

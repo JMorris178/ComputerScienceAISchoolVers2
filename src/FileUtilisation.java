@@ -97,7 +97,7 @@ public class FileUtilisation {
         }
     }
 
-    public static void InsertLines(int lineNum, Object replacementLine) { //Inserts the inputted line where anotherlineonce was
+    public static void InsertLines(int lineNum, Object replacementLine) { //Inserts the inputted line where another line once was
         try {
             // input the (modified) file content to the StringBuffer "input"
             BufferedReader file = new BufferedReader(new FileReader("userData"));
@@ -140,6 +140,72 @@ public class FileUtilisation {
             System.out.println("Problem reading file.");
         }
     }
+
+
+    public static void fileSorter(){ //sorts the lines into an array list in order so that the new file can be created.
+        try {
+            BufferedReader file = new BufferedReader(new FileReader("userData"));
+            StringBuffer inputBuffer = new StringBuffer();
+            ArrayList passer = new ArrayList();
+            String line;
+            boolean offset = false;
+            int count = 0;
+            while ((line = file.readLine()) != null) {
+
+            }
+        }catch(Exception e){
+                System.out.println("Problem reading file.");
+            }
+
+    }
+
+    public static void sortedFile(int lineNum, Object replacementLine) { //Creates a new file and then copies lines from the original file into this new file in the sorted order
+        //Needs the list to be sorted
+        try {
+            // Creates the new file
+
+            //Places the sorted records into the new file.
+            BufferedReader file = new BufferedReader(new FileReader("userData"));
+            StringBuffer inputBuffer = new StringBuffer();
+            String line;
+            String passer = "";
+            boolean offset = false;
+            int count = 0;
+            while ((line = file.readLine()) != null) {
+                if (count == lineNum) {
+                    passer = line;
+                    offset = true;
+                    line = replacementLine.toString();
+                    inputBuffer.append(line);
+                    inputBuffer.append('\n');
+                }else if (count == lineNum+1) {
+                    line = passer;
+                    inputBuffer.append(line);
+                    inputBuffer.append('\n');
+                }else if (offset = true){
+                    line = readFromFile(count-1).toString(); // Finds the original line on the original position.
+                    inputBuffer.append(line);
+                    inputBuffer.append('\n');
+                } else {
+                    line = readFromFile(count).toString(); // Finds the original line in the original file then copies it.
+                    inputBuffer.append(line);
+                    inputBuffer.append('\n');
+                }
+                count++;
+            }
+            file.close();
+
+            // write the new string with the replaced line OVER the same file
+            FileOutputStream fileOut = new FileOutputStream("userData");
+            fileOut.write(inputBuffer.toString().getBytes());
+            fileOut.close();
+        }
+
+        catch(Exception e){
+            System.out.println("Problem reading file.");
+        }
+    }
+
 
     public static void replaceLines(int lineNum, ArrayList<String> replacementLine) {
         try {
