@@ -1,16 +1,29 @@
 import java.util.Calendar;
 import java.util.Scanner;
+import javax.swing.*;
 
 public class Main {
+    public static BasicGUI sGUI;
+    public static final int WINDOW_WIDTH = 600;
+    public static final int WINDOW_HEIGHT = 400;
     public static void main(String[] args) {
+
         boolean repeat = true;
         Car car = new Car(0,0,0, 0); //Sets up the constructor
         InitialSetup.createNewFile(car); //Checks if the user has a file already. If they don't, it performs an initial set up
         Calendar calendar =  Calendar.getInstance(); //Sets up the calendar to today's date
+        JFrame frame = new JFrame("Program Title");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setResizable(false);
+        sGUI = new BasicGUI(WINDOW_WIDTH, WINDOW_HEIGHT);
+        frame.add(sGUI);
         while (repeat) { //While loop used to repeat the core of the program over and over until
+            frame.pack(); // tell window to resize to fit components
+            frame.setVisible(true);
             System.out.println("Hello user. Would you like to go to 1. The Mileage Calculator, or 2. Settings, or 3. The Budgeting Sheet");
             Scanner userInput = new Scanner(System.in);
             int choice = userInput.nextInt();
+
             if(choice == 1){
                 Interfaces.mileageCalcInterface(calendar,car); //Takes the user to the mileage calculator section
             }

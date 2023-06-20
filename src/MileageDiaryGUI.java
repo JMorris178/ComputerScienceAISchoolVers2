@@ -1,21 +1,22 @@
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-public class BasicGUI extends JPanel implements ActionListener {
-    // a UI where we can add other UI widgets eg buttons
+public class MileageDiaryGUI extends JPanel {
     ArrayList<JButton> buttons = new ArrayList<>();
     JButton button1;
     JButton button2;
     JButton button3;
+    JButton button4;
+    private JFrame frame;{
 
-
-
-    public BasicGUI(int width, int height) {
-        this.setPreferredSize(new Dimension(width, height));
-        setLayout(null);
+    }
+    public MileageDiaryGUI(int width, int height) {
+        frame = new JFrame("Mileage Diary");
+        frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+        frame.setSize(width, height);
+        frame.getContentPane().add(this);
+        frame.setVisible(true);
 
         button1 = new JButton("Mileage Calculator");
         button1.setBounds(200, 100, 200, 40);
@@ -33,7 +34,6 @@ public class BasicGUI extends JPanel implements ActionListener {
         add(button3);
     }
 
-    @Override
     public void actionPerformed(ActionEvent e) {
         // respond to button clicks
         System.out.println(e.getActionCommand() + " was clicked");
