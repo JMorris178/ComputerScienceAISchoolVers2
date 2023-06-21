@@ -12,8 +12,7 @@ public class BasicGUI extends JPanel implements ActionListener {
     JButton button3;
 
 
-
-    public BasicGUI(int width, int height) {
+    public BasicGUI(int width, int height, Car car) {
         this.setPreferredSize(new Dimension(width, height));
         setLayout(null);
 
@@ -33,13 +32,14 @@ public class BasicGUI extends JPanel implements ActionListener {
         add(button3);
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
+
+    public void actionPerformed(ActionEvent e, Car car) {
         // respond to button clicks
         System.out.println(e.getActionCommand() + " was clicked");
         if (e.getActionCommand().equals("Mileage Calculator")) { //If the Mileage calculator
-            MileageDiaryGUI mGUI= new MileageDiaryGUI(600,400);
-
+            MileageDiaryGUI mGUI = new MileageDiaryGUI(600, 400);
+        }if (e.getActionCommand().equals("Settings")) { //If the Mileage calculator
+                SettingsGUI sGUI = new SettingsGUI(600, 400, car);
+            }
         }
     }
-}

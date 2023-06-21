@@ -3,7 +3,7 @@ import java.util.Scanner;
 import javax.swing.*;
 
 public class Main {
-    public static BasicGUI sGUI;
+    public static BasicGUI menuGUI;
     public static final int WINDOW_WIDTH = 600;
     public static final int WINDOW_HEIGHT = 400;
     public static void main(String[] args) {
@@ -15,8 +15,8 @@ public class Main {
         JFrame frame = new JFrame("Program Title");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setResizable(false);
-        sGUI = new BasicGUI(WINDOW_WIDTH, WINDOW_HEIGHT);
-        frame.add(sGUI);
+        menuGUI = new BasicGUI(WINDOW_WIDTH, WINDOW_HEIGHT, car);
+        frame.add(menuGUI);
         while (repeat) { //While loop used to repeat the core of the program over and over until
             frame.pack(); // tell window to resize to fit components
             frame.setVisible(true);

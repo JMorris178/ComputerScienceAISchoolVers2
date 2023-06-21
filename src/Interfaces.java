@@ -3,17 +3,11 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Interfaces {
-    public static void settingsInterface(Car car) {
+    public static void settingsInterface(float input, int choice) {
         boolean repeat = true;
-        while (repeat) {
-            System.out.println("Do you want to change 1. The MPG, 2. The fuel tank capacity, or 3. The fuel cost? Type a number out of this range to return to the main menu.");
-            Scanner userInput = new Scanner(System.in);
-            int choice = userInput.nextInt();
-            if (choice == 1) {
-                System.out.println("Please input the new MPG in the form of a float (eg. 1.0)");
-                float newMPG = userInput.nextFloat();
-                FileUtilisation.replaceLines(0, newMPG); //line 0 is always the MPG, so it can easily be accessed and changed.
-                car.setMPG(newMPG); //updates it in the constructor
+        if (choice == 1) {
+                FileUtilisation.replaceLines(0, input); //line 0 is always the MPG, so it can easily be accessed and changed.
+                car.setMPG(input); //updates it in the constructor
             } else if (choice == 2) {
                 System.out.println("Please input the new fuel tank capacity in the form of a float (eg. 1.0)");
                 float newFTC = userInput.nextFloat();

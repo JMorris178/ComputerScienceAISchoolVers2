@@ -1,16 +1,20 @@
 import javax.swing.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-public class MileageDiaryGUI extends JPanel {
+public class MileageDiaryGUI extends JPanel implements ActionListener {
     ArrayList<JButton> buttons = new ArrayList<>();
     JButton button1;
     JButton button2;
     JButton button3;
     JButton button4;
-    private JFrame frame;{
+    private JFrame frame;
+
+    {
 
     }
+
     public MileageDiaryGUI(int width, int height) {
         frame = new JFrame("Mileage Diary");
         frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
@@ -42,4 +46,4 @@ public class MileageDiaryGUI extends JPanel {
 
         }
     }
-}
+    }
