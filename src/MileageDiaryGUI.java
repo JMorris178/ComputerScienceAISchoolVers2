@@ -44,6 +44,7 @@ public class MileageDiaryGUI extends JPanel implements ActionListener {
         if (e.getActionCommand().equals("Mileage Calculator")) { //If the Mileage calculator
             MileageDiaryGUI mGUI= new MileageDiaryGUI(600,400);
 
+
         }
     }
     }

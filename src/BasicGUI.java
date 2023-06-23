@@ -30,17 +30,23 @@ public class BasicGUI extends JPanel implements ActionListener {
         button3.setBounds(200, 250, 200, 40);
         button3.addActionListener(this);
         add(button3);
+
+        Utilisation.constructorUpdate(car);
     }
 
 
-    //
-    public void actionPerformed(ActionEvent e, Car car) {
+    @Override
+    public void actionPerformed(ActionEvent e) {
         // respond to button clicks
         System.out.println(e.getActionCommand() + " was clicked");
         if (e.getActionCommand().equals("Mileage Calculator")) { //If the Mileage calculator
             MileageDiaryGUI mGUI = new MileageDiaryGUI(600, 400);
         }if (e.getActionCommand().equals("Settings")) { //If the Mileage calculator
-                SettingsGUI sGUI = new SettingsGUI(600, 400, car);
+                SettingsGUI sGUI = new SettingsGUI(600, 400);
             }
         }
+
+
+
+
     }

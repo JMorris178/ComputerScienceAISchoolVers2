@@ -3,7 +3,7 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Interfaces {
-    public static void settingsInterface(float input, int choice) {
+    public static void settingsInterface(float input, int choice, Car car) {
         boolean repeat = true;
         if (choice == 1) {
                 FileUtilisation.replaceLines(0, input); //line 0 is always the MPG, so it can easily be accessed and changed.
@@ -24,7 +24,7 @@ public class Interfaces {
                 repeat = false;
             }
         }
-    }
+
 
     public static void mileageCalcInterface(Calendar calendar, Car car) {
         boolean repeat = true;

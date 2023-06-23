@@ -243,6 +243,42 @@ public class FileUtilisation {
         }
     }
 
+    public static void replaceLinesWithConstructor(int lineNum, ArrayList<String> replacementLine) {
+        try {
+            // input the (modified) file content to the StringBuffer "input"
+            BufferedReader file = new BufferedReader(new FileReader("userData"));
+            StringBuffer inputBuffer = new StringBuffer();
+            String line;
+            int count = 0;
+
+            while ((line = file.readLine()) != null) {
+                if (count == lineNum) {
+                    line = replacementLine.toString();
+                    line = line.replace("[",""); //removes the two brackets so it's the same as the rest of the records
+                    line = line.replace("]",",");//replaces the last one with a comma
+                    inputBuffer.append(line);
+                    inputBuffer.append('\n');
+
+                } else {
+                    line = readFromFile(count).toString(); // Finds the original line in the original file then copies it.
+                    inputBuffer.append(line);
+                    inputBuffer.append('\n');
+                }
+                count++;
+            }
+            file.close();
+
+            //writes the new string with the replaced line over the same file
+            FileOutputStream fileOut = new FileOutputStream("userData");
+            fileOut.write(inputBuffer.toString().getBytes());
+            fileOut.close();
+        }
+
+        catch(Exception e){
+            System.out.println("Problem reading file.");
+        }
+    }
+
     public static boolean findInFile(ArrayList<String> searchedItem){
         try {
             FileReader fr = new FileReader("userData");

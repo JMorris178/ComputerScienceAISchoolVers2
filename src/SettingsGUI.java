@@ -17,7 +17,7 @@ public class SettingsGUI extends JPanel implements ActionListener {
 
     }
 
-    public SettingsGUI(int width, int height, Car car) {
+    public SettingsGUI(int width, int height) {
         frame = new JFrame("Settings");
         frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         frame.setSize(width, height);
@@ -43,20 +43,17 @@ public class SettingsGUI extends JPanel implements ActionListener {
     }
 
     @Override
-    public void actionPerformed(ActionEvent e, Car car) {
+    public void actionPerformed(ActionEvent e) {
         // respond to button clicks
-        int choice = 0;
         if (e.getActionCommand().equals("Change MPG")) { //If the Mileage calculator
             String newMPG = JOptionPane.showInputDialog("");
-            choice = 1;
-            float floatPasser = parseFloat(newMPG);
-            Interfaces.settingsInterface(newMPG,choice,car);
+            FileUtilisation.replaceLines(1,newMPG);
         } else if (e.getActionCommand().equals("Change fuel tank capacity")) { //If the Mileage calculator
-            choice = 2;
             String newFTC = JOptionPane.showInputDialog("");
+            FileUtilisation.replaceLines(2,newFTC);
         } else if (e.getActionCommand().equals("Change fuel cost")) { //If the Mileage calculator
-            choice = 3;
             String newFC = JOptionPane.showInputDialog("");
+            FileUtilisation.replaceLines(3,newFC);
         }
 
 
