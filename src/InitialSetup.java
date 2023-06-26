@@ -8,18 +8,18 @@ import static java.lang.Float.parseFloat;
 public class InitialSetup { //Checks to see if a file exists, but if it doesn't it runs a setup process to make sure the program works.
     public static void createNewFile(Car car){
         Scanner input = new Scanner(System.in);
-        ArrayList<Float> tempToAddToFile = new ArrayList<>(); //allows the program to push the settings data to the file if needed
+        ArrayList<Double> tempToAddToFile = new ArrayList<>(); //allows the program to push the settings data to the file if needed
         try {
             File fileCreate = new File("userData");
             if (fileCreate.createNewFile()) { //If the file doesn't exist
                 System.out.println("File created: " + fileCreate.getName());
                 System.out.println("Since this is the first time you are using this, please input some basic data for this program to function");
                 System.out.println("What is your cars MPG?");
-                float tempMPG = input.nextFloat();
+                Double tempMPG = input.nextDouble();
                 System.out.println("What is your fuel tanks max capacity?");
-                float tempFuelTank = input.nextFloat();
+                Double tempFuelTank = input.nextDouble();
                 System.out.println("What is the current cost of fuel?");
-                float tempFuelCost = input.nextFloat();
+                Double tempFuelCost = input.nextDouble();
                 tempToAddToFile.add(tempMPG); //adds these to the file.
                 tempToAddToFile.add(tempFuelTank);
                 tempToAddToFile.add(tempFuelCost);
@@ -37,10 +37,10 @@ public class InitialSetup { //Checks to see if a file exists, but if it doesn't 
             String tempPassFuelTank = String.valueOf(FileUtilisation.readFromFile(1));
             String tempPassFuelCost = String.valueOf(FileUtilisation.readFromFile(2));
             String tempPassMaxCap = String.valueOf(FileUtilisation.readFromFile(3));
-            car.setMPG(parseFloat(tempPassMPG));
-            car.setFuelTank(parseFloat(tempPassFuelTank));
-            car.setPrices(parseFloat(tempPassFuelCost));
-            car.setMaxCap(parseFloat(tempPassMaxCap));
+            car.setMPG(Double.parseDouble(tempPassMPG));
+            car.setFuelTank(Double.parseDouble(tempPassFuelTank));
+            car.setPrices(Double.parseDouble(tempPassFuelCost));
+            car.setMaxCap(Double.parseDouble(tempPassMaxCap));
 
         } catch (IOException e) {
             e.printStackTrace();

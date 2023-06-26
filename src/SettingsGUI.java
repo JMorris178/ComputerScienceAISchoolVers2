@@ -47,13 +47,13 @@ public class SettingsGUI extends JPanel implements ActionListener {
         // respond to button clicks
         if (e.getActionCommand().equals("Change MPG")) { //If the Mileage calculator
             String newMPG = JOptionPane.showInputDialog("");
-            FileUtilisation.replaceLines(1,newMPG);
+            Interfaces.settingsInterface(Double.parseDouble(newMPG),0);
         } else if (e.getActionCommand().equals("Change fuel tank capacity")) { //If the Mileage calculator
             String newFTC = JOptionPane.showInputDialog("");
-            FileUtilisation.replaceLines(2,newFTC);
+            Interfaces.settingsInterface(Double.parseDouble(newFTC),1);
         } else if (e.getActionCommand().equals("Change fuel cost")) { //If the Mileage calculator
             String newFC = JOptionPane.showInputDialog("");
-            FileUtilisation.replaceLines(3,newFC);
+            Interfaces.settingsInterface(Double.parseDouble(newFC),2);
         }
 
 

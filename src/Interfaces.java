@@ -3,28 +3,21 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Interfaces {
-    public static void settingsInterface(float input, int choice, Car car) {
-        boolean repeat = true;
-        if (choice == 1) {
-                FileUtilisation.replaceLines(0, input); //line 0 is always the MPG, so it can easily be accessed and changed.
-                car.setMPG(input); //updates it in the constructor
-            } else if (choice == 2) {
-                System.out.println("Please input the new fuel tank capacity in the form of a float (eg. 1.0)");
-                float newFTC = userInput.nextFloat();
-                FileUtilisation.replaceLines(1, newFTC);
-                car.setFuelTank(newFTC);
-                FileUtilisation.replaceLines(3, newFTC);//Also sets the new max Capacity on line 3 & in the constructor
-                car.setMaxCap(newFTC);
-            } else if (choice == 3) {
-                System.out.println("Please input the new fuel cost in the form of a float (eg. 1.0)");
-                float newFC = userInput.nextFloat();
-                FileUtilisation.replaceLines(2, newFC);
-                car.setPrices(newFC);
-            } else {
-                repeat = false;
-            }
+    public static void settingsInterface(Double input, int choice) {
+        Car car = Utilisation.constructorSetup();
+        if (choice == 0) {
+            FileUtilisation.replaceLines(0, input); //line 0 is always the MPG, so it can easily be accessed and changed.
+            car.setMPG(input); //updates it in the constructor
+        } else if (choice == 1) {
+            FileUtilisation.replaceLines(1, input);
+            car.setFuelTank(input);
+            FileUtilisation.replaceLines(3, input);//Also sets the new max Capacity on line 3 & in the constructor
+            car.setMaxCap(input);
+        } else if (choice == 2) {
+            FileUtilisation.replaceLines(2, input);
+            car.setPrices(input);
         }
-
+    }
 
     public static void mileageCalcInterface(Calendar calendar, Car car) {
         boolean repeat = true;
@@ -39,11 +32,11 @@ public class Interfaces {
             boolean refillRequired = false;
             boolean extraValue = false;
             boolean replaceLines = false;
-            float remainderInTank = 0;
-            float offset;
-            float originalValue;
-            float newValue;
-            float overshoot = 0;
+            Double remainderInTank = 0.0;
+            Double offset;
+            Double originalValue;
+            Double newValue;
+            Double overshoot = 0.0;
 
             if (choice == 1) {
                 record.add(calendar.get(Calendar.DAY_OF_MONTH)); //uses calendar to get the date automatically.
@@ -56,10 +49,10 @@ public class Interfaces {
                     passer.add(String.valueOf(record.get(i))); //converts the date into strings and adds them to passer for later checks
                 }
                 System.out.println("How many miles did you travel?");
-                float miles = userInput.nextInt();
-                float fuelCon = Utilisation.findFuelConsumption(miles);
+                Double miles = userInput.nextDouble();
+                Double fuelCon = Utilisation.findFuelConsumption(miles);
                 if (FileUtilisation.findInFile(passer) == true) { //Checks if the dates are already in the database. If true, a different method needs to be carried out to replace the lines.
-                    offset = Float.valueOf((String) FileUtilisation.returnFromFile(passer, 4)); //Takes the current fuel consumption in the record already in the file
+                    offset = Double.valueOf((String) FileUtilisation.returnFromFile(passer, 4)); //Takes the current fuel consumption in the record already in the file
                     newValue = car.getFuelTank() + offset;
                     if (newValue > car.getMaxCap()) {//checks to see if the new value has exceeded the capacity
                         overshoot = newValue - car.getMaxCap(); //Finds the overshoot
@@ -120,10 +113,10 @@ public class Interfaces {
                     passer.add(String.valueOf(record.get(i))); //converts the date into strings and adds them to passer for later checks
                 }
                 System.out.println("How many miles did you travel?");
-                float miles = userInput.nextInt();
-                float fuelCon = Utilisation.findFuelConsumption(miles);
+                Double miles = userInput.nextDouble();
+                Double fuelCon = Utilisation.findFuelConsumption(miles);
                 if (FileUtilisation.findInFile(passer) == true) { //Checks if the dates are already in the database. If true, a different method needs to be carried out to replace the lines.
-                    offset = Float.valueOf((String) FileUtilisation.returnFromFile(passer, 4)); //Takes the current fuel consumption in the record already in the file
+                    offset = Double.valueOf((String) FileUtilisation.returnFromFile(passer, 4)); //Takes the current fuel consumption in the record already in the file
                     newValue = car.getFuelTank() + offset;
                     if (newValue > car.getMaxCap()) {//checks to see if the new value has exceeded the capacity
                         overshoot = newValue - car.getMaxCap(); //Finds the overshoot
@@ -210,7 +203,7 @@ public class Interfaces {
             calendar = Calendar.getInstance(); //resets the calendar back to the current date to reset any changes made during one of the methods
             ArrayList<String> passer = new ArrayList<>(); //creates a new arraylist to pass data through that isn't the records
             System.out.println("Would you like to view the money spent on 1. Today 2. A specific date, 3. The past week, 4. A specific week, 5.Over the last month, 6. Over a previous month. Type a number out of this range to return to the main menu");
-            float total = 0;
+            Double total = 0.0;
             int choice = userInput.nextInt();
             if (choice == 1) {
                 passer.add(String.valueOf((calendar.get(Calendar.DAY_OF_MONTH))));
@@ -218,7 +211,7 @@ public class Interfaces {
                 passer.add(String.valueOf(calendar.get(Calendar.YEAR)));
                 if (Utilisation.refuelCheck(passer)) { //checks if the index at 5 has a value, and if it does it carries out the following as there was a refuel
                     if (FileUtilisation.returnFromFile(passer, 6).equals("true")) { //checks if index 6 is true. If it is then there's a remainder in index 7, which it will then pass through to the cost calculator
-                        float remainderInTank = Float.valueOf((String) FileUtilisation.returnFromFile(passer, 7)); //Casts the returned value to a string so it can then be converted into a float.
+                        Double remainderInTank = Double.valueOf((String) FileUtilisation.returnFromFile(passer, 7)); //Casts the returned value to a string so it can then be converted into a float.
                         if (Utilisation.costCalculator(car) == 0) { //Checks if any money has been spent
                             System.out.println("You haven't spent any money on fuel today");
                         } else {
@@ -250,7 +243,7 @@ public class Interfaces {
                 passer.add(year);
                 if (Utilisation.refuelCheck(passer)) { //checks if the index at 5 has a value, and if it does it carries out the following as there was a refuel
                     if (FileUtilisation.returnFromFile(passer, 6).equals("true")) { //checks if index 6 is true. If it is then there's a remainder in index 7, which it will then pass through to the cost calculator
-                        float remainderInTank = Float.valueOf((String) FileUtilisation.returnFromFile(passer, 7)); //Casts the returned value to a string so it can then be converted into a float.
+                        Double remainderInTank = Double.valueOf((String) FileUtilisation.returnFromFile(passer, 7)); //Casts the returned value to a string so it can then be converted into a float.
                         if (Utilisation.costCalculator(car) == 0) {
                             System.out.println("You haven't spent any money on fuel today");
                         } else {

@@ -1,46 +1,46 @@
 public class Car {
     //defines the 4 main variables that can be changed via the settings menu
-    float MPG;
-    float fuelTank;
-    float prices;
-    float maxCap;
+    Double MPG;
+    Double fuelTank;
+    Double prices;
+    Double maxCap;
 
 
-    public Car(float MPG, float fuelTank, float prices, float maxCap){
+    public Car(Double MPG, Double fuelTank, Double prices, Double maxCap){
         this.MPG = MPG;
         this.fuelTank = fuelTank;
         this.prices = prices;
         this.maxCap = maxCap;
     }
-    public float getMPG() {
+    public Double getMPG() {
         return MPG;
     }
 
-    public void setMPG(float MPG) {
+    public void setMPG(Double MPG) {
         this.MPG = MPG;
     }
 
-    public float getFuelTank() {
+    public Double getFuelTank() {
         return fuelTank;
     }
 
-    public void setFuelTank(float fuelTank) {
+    public void setFuelTank(Double fuelTank) {
         this.fuelTank = fuelTank;
     }
 
-    public float getPrices() {
+    public Double getPrices() {
         return prices;
     }
 
-    public void setPrices(float prices) {
+    public void setPrices(Double prices) {
         this.prices = prices;
     }
 
-    public float getMaxCap() {
+    public Double getMaxCap() {
         return maxCap;
     }
 
-    public void setMaxCap(float maxCap) {
+    public void setMaxCap(Double maxCap) {
         this.maxCap = maxCap;
     }
 }

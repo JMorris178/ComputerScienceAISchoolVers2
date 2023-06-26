@@ -27,9 +27,6 @@ public class Main {
             if(choice == 1){
                 Interfaces.mileageCalcInterface(calendar,car); //Takes the user to the mileage calculator section
             }
-            else if(choice == 2){
-                Interfaces.settingsInterface(car); //Takes the user to the settings section
-            }
             else if(choice == 3){
                 Interfaces.budgetingSheetInterface(car,calendar); //Takes the user to the Budgeting Sheet interface
             }else{

@@ -31,7 +31,7 @@ public class BasicGUI extends JPanel implements ActionListener {
         button3.addActionListener(this);
         add(button3);
 
-        Utilisation.constructorUpdate(car);
+
     }
 
 
