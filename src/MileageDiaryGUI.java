@@ -2,14 +2,21 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class MileageDiaryGUI extends JPanel implements ActionListener {
     ArrayList<JButton> buttons = new ArrayList<>();
     JButton button1;
     JButton button2;
     JButton button3;
-    JButton button4;
+    Calendar calendar =  Calendar.getInstance();
     private JFrame frame;
+    //Check date
+    //Create calendar for the month
+    //Checks through the file and if a date has data in then number blue
+    //If a cell is clicked then display data for that day
+    //If the arrow at the top is clicked, then repeat this
+    //Have a searchbar at the top that lets a user search a date, and then display that month
 
     {
 
@@ -21,6 +28,7 @@ public class MileageDiaryGUI extends JPanel implements ActionListener {
         frame.setSize(width, height);
         frame.getContentPane().add(this);
         frame.setVisible(true);
+        calendar.getTime();
 
         button1 = new JButton("Mileage Calculator");
         button1.setBounds(200, 100, 200, 40);
