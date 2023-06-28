@@ -40,7 +40,7 @@ public class MileageDiaryGUI extends JPanel implements ActionListener {
     JButton button30;
     JButton button31;
 
-    Calendar calendar =  Calendar.getInstance();
+
     private JFrame frame;
     //Check date
     //Create calendar for the month
@@ -60,7 +60,7 @@ public class MileageDiaryGUI extends JPanel implements ActionListener {
         frame.getContentPane().add(this);
 
         frame.setLayout(new GridLayout(5,7,25,25));
-        calendar.getTime();
+
 
         button1 = new JButton("1");
         button1.addActionListener(this);
@@ -165,9 +165,13 @@ public class MileageDiaryGUI extends JPanel implements ActionListener {
         // respond to button clicks
         System.out.println(e.getActionCommand() + "button was clicked");
         ArrayList<String> passer = new ArrayList();
+        Calendar calendar =  Calendar.getInstance();
 
         if (e.getActionCommand().equals("3")) { //If the
             passer.add("3");
+            int month = calendar.MONTH;
+            int year = calendar.MONTH;
+
             passer.add("4");
             passer.add("2023");
             JOptionPane.showMessageDialog(null, FileUtilisation.returnFromFile(passer,3));
