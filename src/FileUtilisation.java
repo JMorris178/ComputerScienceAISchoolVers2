@@ -344,7 +344,12 @@ public class FileUtilisation {
                 }
                 count++;
             }
-            return(returnData);
+            if (found == true){
+                return(returnData);
+            }else{
+                return(null);
+            }
+
         } catch (IOException e) {
             e.printStackTrace();
         }
