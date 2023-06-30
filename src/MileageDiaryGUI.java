@@ -39,6 +39,9 @@ public class MileageDiaryGUI extends JPanel implements ActionListener {
     JButton button29;
     JButton button30;
     JButton button31;
+    JButton button32;
+    JButton button33;
+
 
 
     private JFrame frame;
@@ -57,6 +60,10 @@ public class MileageDiaryGUI extends JPanel implements ActionListener {
         frame.getContentPane().add(this);
 
         frame.setLayout(new GridLayout(5, 7, 25, 25));
+        Calendar calendar = Calendar.getInstance();
+        int month = calendar.get((calendar.MONTH));
+        month = month+1;
+        int year = calendar.get(calendar.YEAR);
 
 
         button1 = new JButton("1");
@@ -121,6 +128,13 @@ public class MileageDiaryGUI extends JPanel implements ActionListener {
         button30.addActionListener(this);
         button31 = new JButton("31");
         button31.addActionListener(this);
+        //arrows
+        button32 = new JButton("<---");
+        button32.putClientProperty( "calendar", calendar);
+        button32.addActionListener(this);
+        button33 = new JButton("--->");
+        button33.putClientProperty( "calendar", calendar);
+        button33.addActionListener(this);
 
         frame.add(button1);
         frame.add(button2);
@@ -153,6 +167,8 @@ public class MileageDiaryGUI extends JPanel implements ActionListener {
         frame.add(button29);
         frame.add(button30);
         frame.add(button31);
+        frame.add(button32);
+        frame.add(button33);
         frame.setVisible(true);
 
 
@@ -161,13 +177,11 @@ public class MileageDiaryGUI extends JPanel implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         // respond to button clicks
         System.out.println(e.getActionCommand() + "button was clicked");
-
         Calendar calendar = Calendar.getInstance();
         int month = calendar.get((calendar.MONTH));
         month = month+1;
         int year = calendar.get(calendar.YEAR);
-        System.out.println(month);
-        System.out.println(year);
+
 
         if (e.getActionCommand().equals("1")) { //If the
             checkForData(1,month,year);
@@ -229,8 +243,21 @@ public class MileageDiaryGUI extends JPanel implements ActionListener {
             checkForData(29,month,year);
         }if (e.getActionCommand().equals("30")) { //If the
             checkForData(30,month,year);
-        }if (e.getActionCommand().equals("30")) { //If the
+        }if (e.getActionCommand().equals("31")) { //If the
             checkForData(31, month, year);
+        }if (e.getActionCommand().equals("<---")) { //If the
+            calendar = ((Calendar)((JButton)e.getSource()).getClientProperty( "calendar" ));
+            month = calendar.get((calendar.MONTH));
+            month = month+1;
+            year = calendar.get(calendar.YEAR);
+            checkForData(1, month, year);
+        }if (e.getActionCommand().equals("--->")) { //If the
+            calendar = ((Calendar)((JButton)e.getSource()).getClientProperty( "calendar" ));
+            month = calendar.get((calendar.MONTH));
+            month = month+1;
+            year = calendar.get(calendar.YEAR);
+            int day = calendar.get(calendar.DAY_OF_MONTH);
+            changeMonthAhead(calendar,day,month,year);
         }
     }
 
@@ -244,9 +271,18 @@ public class MileageDiaryGUI extends JPanel implements ActionListener {
         if (output == null) {
             JOptionPane.showMessageDialog(null, "No data for this day");
         } else {
-            JOptionPane.showMessageDialog(null, output);
-
-
+            Object output2 = FileUtilisation.returnFromFile(passer, 4);
+            Object output3 = FileUtilisation.returnFromFile(passer, 5);
+            JOptionPane.showMessageDialog(null, "Miles travelled : " + output + "   " + "Fuel used : " + output2 + "   " + "Refuel? : " + output3);
         }
+    }
+
+    public void changeMonthAhead(Calendar calendar,int day, int month, int year){ //changes the month by 1
+        month = month+1;
+        if(month>12) { //if the month is past december, sets the year to the next, and then month to January
+            year = year + 1;
+            month = 1;
+        }
+        calendar.set(day,month,year); //sets the calendar to the correct month
     }
 }

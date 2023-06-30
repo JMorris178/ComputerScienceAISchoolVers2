@@ -196,11 +196,11 @@ public class Interfaces {
         }
     }
 
-    public static void budgetingSheetInterface(Car car, Calendar calendar) {
+    public static void budgetingSheetInterface(Car car) {
         Scanner userInput = new Scanner(System.in);
         boolean repeat = true;
         while (repeat) {
-            calendar = Calendar.getInstance(); //resets the calendar back to the current date to reset any changes made during one of the methods
+            Calendar calendar = Calendar.getInstance(); //resets the calendar back to the current date to reset any changes made during one of the methods
             ArrayList<String> passer = new ArrayList<>(); //creates a new arraylist to pass data through that isn't the records
             System.out.println("Would you like to view the money spent on 1. Today 2. A specific date, 3. The past week, 4. A specific week, 5.Over the last month, 6. Over a previous month. Type a number out of this range to return to the main menu");
             Double total = 0.0;

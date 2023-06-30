@@ -28,7 +28,7 @@ public class Main {
                 Interfaces.mileageCalcInterface(calendar,car); //Takes the user to the mileage calculator section
             }
             else if(choice == 3){
-                Interfaces.budgetingSheetInterface(car,calendar); //Takes the user to the Budgeting Sheet interface
+                Interfaces.budgetingSheetInterface(car); //Takes the user to the Budgeting Sheet interface
             }else{
                 repeat = false; //ends the loop
             }
