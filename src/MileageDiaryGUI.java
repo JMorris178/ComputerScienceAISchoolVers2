@@ -7,6 +7,7 @@ import java.util.Calendar;
 
 public class MileageDiaryGUI extends JPanel implements ActionListener {
     ArrayList<JButton> buttons = new ArrayList<>();
+    Calendar calendar = Calendar.getInstance();
     //Creates buttons for the max amount of dates possible in a month
     JButton button1;
     JButton button2;
@@ -60,12 +61,6 @@ public class MileageDiaryGUI extends JPanel implements ActionListener {
         frame.getContentPane().add(this);
 
         frame.setLayout(new GridLayout(5, 7, 25, 25));
-        Calendar calendar = Calendar.getInstance();
-        int month = calendar.get((calendar.MONTH));
-        month = month+1;
-        int year = calendar.get(calendar.YEAR);
-
-
         button1 = new JButton("1");
         button1.addActionListener(this);
         button2 = new JButton("2");
@@ -130,10 +125,8 @@ public class MileageDiaryGUI extends JPanel implements ActionListener {
         button31.addActionListener(this);
         //arrows
         button32 = new JButton("<---");
-        button32.putClientProperty( "calendar", calendar);
         button32.addActionListener(this);
         button33 = new JButton("--->");
-        button33.putClientProperty( "calendar", calendar);
         button33.addActionListener(this);
 
         frame.add(button1);
@@ -170,17 +163,19 @@ public class MileageDiaryGUI extends JPanel implements ActionListener {
         frame.add(button32);
         frame.add(button33);
         frame.setVisible(true);
-
-
     }
 
     public void actionPerformed(ActionEvent e) {
         // respond to button clicks
         System.out.println(e.getActionCommand() + "button was clicked");
-        Calendar calendar = Calendar.getInstance();
+        int day = calendar.get(calendar.DAY_OF_MONTH);
         int month = calendar.get((calendar.MONTH));
         month = month+1;
         int year = calendar.get(calendar.YEAR);
+
+        System.out.println(day);
+        System.out.println(month);
+        System.out.println(year);
 
 
         if (e.getActionCommand().equals("1")) { //If the
@@ -246,19 +241,11 @@ public class MileageDiaryGUI extends JPanel implements ActionListener {
         }if (e.getActionCommand().equals("31")) { //If the
             checkForData(31, month, year);
         }if (e.getActionCommand().equals("<---")) { //If the
-            calendar = ((Calendar)((JButton)e.getSource()).getClientProperty( "calendar" ));
-            month = calendar.get((calendar.MONTH));
-            month = month+1;
-            year = calendar.get(calendar.YEAR);
-            checkForData(1, month, year);
+            changeMonthBack(day,month,year);
         }if (e.getActionCommand().equals("--->")) { //If the
-            calendar = ((Calendar)((JButton)e.getSource()).getClientProperty( "calendar" ));
-            month = calendar.get((calendar.MONTH));
-            month = month+1;
-            year = calendar.get(calendar.YEAR);
-            int day = calendar.get(calendar.DAY_OF_MONTH);
-            changeMonthAhead(calendar,day,month,year);
+            changeMonthAhead(day,month,year);
         }
+
     }
 
     public void checkForData(int day, int month, int year){
@@ -277,12 +264,35 @@ public class MileageDiaryGUI extends JPanel implements ActionListener {
         }
     }
 
-    public void changeMonthAhead(Calendar calendar,int day, int month, int year){ //changes the month by 1
-        month = month+1;
-        if(month>12) { //if the month is past december, sets the year to the next, and then month to January
-            year = year + 1;
+    public void changeMonthAhead(int day, int month, int year){ //changes the month by 1
+        calendar.set(day,month,year); //sets the calendar to the correct month
+        if (month == 0 || month == 2 || month == 4 || month == 6 || month == 7 || month == 9 || month == 11) {//checks the month and then depending on the current month it will seperate this based on the number of days in the month. This line is for all the months with 31 days
+            calendar.add(calendar.DATE,+31); //sets the calendar to the correct month based on the days in the current month to avoid desync
+        } else if (month == 3 || month == 5 || month == 8 || month == 10) { //30 days
+            calendar.add(calendar.DATE,+30);
+        } else if (month == 1 && (year % 4) == 0) { //checks to see if the year is a leap year and the month is Febuary to check if it needs 28 or 29 days. Done before the regular febuary check on purpose
+            calendar.add(calendar.DATE,+29);
+        } else if (month == 1) {//28 days for a normal Febuary
+            calendar.add(calendar.DATE,+28);
+        }
+    }
+
+    public void changeMonthBack(int day, int month, int year){ //changes the month by 1
+        month = month-1;
+        if(month<1) { //if the month is past december, sets the year to the next, and then month to January
+            year = year - 1;
             month = 1;
         }
-        calendar.set(day,month,year); //sets the calendar to the correct month
+        System.out.println(day & month & year);
+        if (month == 0 || month == 2 || month == 4 || month == 6 || month == 7 || month == 9 || month == 11) {//checks the month and then depending on the current month it will seperate this based on the number of days in the month. This line is for all the months with 31 days
+            calendar.add(calendar.DATE,-31); //sets the calendar to the correct month based on the days in the current month to avoid desync
+        } else if (month == 3 || month == 5 || month == 8 || month == 10) { //30 days
+            calendar.add(calendar.DATE,-30);
+        } else if (month == 1 && (year % 4) == 0) { //checks to see if the year is a leap year and the month is Febuary to check if it needs 28 or 29 days. Done before the regular febuary check on purpose
+            calendar.add(calendar.DATE,-29);
+        } else if (month == 1) {//28 days for a normal Febuary
+            calendar.add(calendar.DATE,-28);
+        }
+
     }
 }
