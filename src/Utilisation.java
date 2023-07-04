@@ -201,7 +201,7 @@ public class Utilisation {
     }
 
     public static Car constructorSetup() {
-        Car car = new Car(0.0,0.0,0.0, 0.0); //Sets up the constructor
+        Car car = new Car(FileUtilisation.readFromFileDouble(0),FileUtilisation.readFromFileDouble(1),FileUtilisation.readFromFileDouble(2), FileUtilisation.readFromFileDouble(3)); //Sets up the constructor
         return (car);
     }
 

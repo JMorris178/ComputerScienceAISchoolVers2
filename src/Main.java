@@ -24,10 +24,7 @@ public class Main {
             Scanner userInput = new Scanner(System.in);
             int choice = userInput.nextInt();
 
-            if(choice == 1){
-                Interfaces.mileageCalcInterface(calendar,car); //Takes the user to the mileage calculator section
-            }
-            else if(choice == 3){
+            if(choice == 3){
                 Interfaces.budgetingSheetInterface(car); //Takes the user to the Budgeting Sheet interface
             }else{
                 repeat = false; //ends the loop

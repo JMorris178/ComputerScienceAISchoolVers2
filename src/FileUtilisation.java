@@ -355,4 +355,18 @@ public class FileUtilisation {
         }
         return(null);
     }
+
+    public static Double readFromFileDouble(int lineNum) { //General code to read stuff from the file. Takes the line number of the line in the file that needs to be read
+        int n = lineNum; // The line number
+        String line;
+        try (Stream<String> lines = Files.lines(Paths.get("userData"))) {
+            line = lines.skip(n).findFirst().get();
+            return (Double.parseDouble(line));
+        } catch (IOException e) {
+            System.out.println(e);
+        }
+        return (0.0);
+
+
+    }
 }
