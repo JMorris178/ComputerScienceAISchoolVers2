@@ -6,43 +6,24 @@ import java.util.stream.Stream;
 import java.util.ArrayList;
 
 public class Utilisation {
-    public static Double findFuelConsumption(Double MT) {
-        int n = 0; // Set to 0 because the MPG is always on line 1
-        String line;
+    public static Double findFuelConsumption(Double MT, Double MPG) {
         Double temp;
-        try (Stream<String> lines = Files.lines(Paths.get("userData"))) {
-            line = lines.skip(n).findFirst().get();
-            temp = MT / Double.valueOf(line); //Calculation to find the fuel consumption
-            return (temp);
-        } catch (IOException e) {
-            System.out.println(e);
-        }
-        return (0.0);
+        temp = MT/MPG; //Calculation to find the fuel consumption
+        return (temp);
     }
 
     public static void carOutOfFuel(Car car) { //Resets the fuel tank of the car
         Double remainder = car.getFuelTank();
-        int n = 3; // The line number for the max capacity of the fuel tank
-        String line;
-        try (Stream<String> lines = Files.lines(Paths.get("userData"))) {
-            line = lines.skip(n).findFirst().get();
-            car.setFuelTank(Double.parseDouble(line) + remainder);
-            FileUtilisation.replaceLines(1, Double.parseDouble(line) + remainder); //sets both the file and constructor back so they're in sync
-        } catch (IOException e) {
-            System.out.println(e);
-        }
+        Double maxCap = car.getMaxCap();
+        car.setFuelTank(maxCap + remainder);
+        FileUtilisation.replaceLines(1, maxCap + remainder); //sets both the file and constructor back so they're in sync
     }
 
     public static void carRefuel(Car car) { //alternate version of CarOutOfFuel if the user refuels on not a full tank
         int n = 3; // The line number for the max capacity of the fuel tank
-        String line;
-        try (Stream<String> lines = Files.lines(Paths.get("userData"))) {
-            line = lines.skip(n).findFirst().get();
-            car.setFuelTank(Double.parseDouble(line)); //As there was fuel still in the tank there was no need to carry over any remainder
-            FileUtilisation.replaceLines(1, Double.parseDouble(line)); //sets both the file and constructor back so they're in sync
-        } catch (IOException e) {
-            System.out.println(e);
-        }
+        car.setFuelTank(car.getMaxCap()); //As there was fuel still in the tank there was no need to carry over any remainder
+        FileUtilisation.replaceLines(1, car.getMaxCap()); //sets both the file and constructor back so they're in sync
+
     }
 
 

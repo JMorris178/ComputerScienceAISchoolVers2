@@ -48,8 +48,9 @@ public class Interfaces {
         for (int i = 0; i < 3; i++) {
             passer.add(String.valueOf(record.get(i))); //converts the date into strings and adds them to passer for later checks
         }
-        Double fuelCon = Utilisation.findFuelConsumption(miles);
-        if (FileUtilisation.findInFile(passer) == true) { //Checks if the dates are already in the database. If true, a different method needs to be carried out to replace the lines.
+        Double MPG = FileUtilisation.readFromFileDouble(1);
+        Double fuelCon = Utilisation.findFuelConsumption(miles,MPG);
+        if (FileUtilisation.findInFile(sortingPasser) == true) { //Checks if the dates are already in the database. If true, a different method needs to be carried out to replace the lines.
             offset = Double.valueOf((String) FileUtilisation.returnFromFile(passer, 4)); //Takes the current fuel consumption in the record already in the file
             newValue = car.getFuelTank() + offset;
             if (newValue > car.getMaxCap()) {//checks to see if the new value has exceeded the capacity
