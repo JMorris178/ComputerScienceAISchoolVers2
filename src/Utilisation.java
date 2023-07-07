@@ -182,7 +182,11 @@ public class Utilisation {
     }
 
     public static Car constructorSetup() {
-        Car car = new Car(FileUtilisation.readFromFileDouble(0),FileUtilisation.readFromFileDouble(1),FileUtilisation.readFromFileDouble(2), FileUtilisation.readFromFileDouble(3)); //Sets up the constructor
+        Double MPG = FileUtilisation.readFromFileDouble(0);
+        Double CurrentFuel = FileUtilisation.readFromFileDouble(1);
+        Double Cost = FileUtilisation.readFromFileDouble(2);
+        Double MaxCap = FileUtilisation.readFromFileDouble(3);
+        Car car = new Car(MPG,CurrentFuel,Cost,MaxCap); //Sets up the constructor
         return (car);
     }
 

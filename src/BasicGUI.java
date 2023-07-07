@@ -50,7 +50,7 @@ public class BasicGUI extends JPanel implements ActionListener {
         }if (e.getActionCommand().equals("Settings")) {
                 SettingsGUI sGUI = new SettingsGUI(600, 400);
         }if (e.getActionCommand().equals("Record Adder")) {
-        RecordAdderGUI rGUI = new RecordAdderGUI(600, 400);
+                RecordAdderGUI rGUI = new RecordAdderGUI(600, 400);
     }
         }
 
