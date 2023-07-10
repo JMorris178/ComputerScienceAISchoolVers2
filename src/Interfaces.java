@@ -9,8 +9,6 @@ public class Interfaces {
             FileUtilisation.replaceLines(0, input); //line 0 is always the MPG, so it can easily be accessed and changed.
             car.setMPG(input); //updates it in the constructor
         } else if (choice == 1) {
-            FileUtilisation.replaceLines(1, input);
-            car.setFuelTank(input);
             FileUtilisation.replaceLines(3, input);//Also sets the new max Capacity on line 3 & in the constructor
             car.setMaxCap(input);
         } else if (choice == 2) {
@@ -47,7 +45,7 @@ public class Interfaces {
         for (int i = 0; i < 3; i++) {
             passer.add(String.valueOf(record.get(i))); //converts the date into strings and adds them to passer for later checks
         }
-        Double MPG = FileUtilisation.readFromFileDouble(1);
+        Double MPG = FileUtilisation.readFromFileDouble(0);
         Double fuelCon = Utilisation.findFuelConsumption(miles,MPG);
         if (FileUtilisation.findInFile(sortingPasser) == true) { //Checks if the dates are already in the database. If true, a different method needs to be carried out to replace the lines.
             offset = Double.valueOf((String) FileUtilisation.returnFromFile(passer, 4)); //Takes the current fuel consumption in the record already in the file
@@ -61,7 +59,7 @@ public class Interfaces {
             replaceLines = true; //sets to true so the if statement later is carries out
         }
         car.setFuelTank((car.getFuelTank()) - fuelCon);
-        FileUtilisation.replaceLines(1, (car.getFuelTank()) - fuelCon);
+        FileUtilisation.replaceLines(1, car.getFuelTank());
         if (car.getFuelTank() <= 0) {
             refillRequired = true; //sets the refill to true
             Utilisation.carOutOfFuel(car); //resets the fuel capacity, with the remainder taken away

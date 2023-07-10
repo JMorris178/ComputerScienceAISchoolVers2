@@ -11,7 +11,12 @@ public class RecordAdderGUI {
         String month = JOptionPane.showInputDialog("What is the month (in the form 2, 7, 12, etc)");
         String year = JOptionPane.showInputDialog("What is the day (in the form 2005, 2010, 2031, etc)");
         String milesTravelled = JOptionPane.showInputDialog("How many miles did you travel?");
-        String refuel  = JOptionPane.showInputDialog("Did you refuel - 'true' or 'false'");
-        Interfaces.mileageCalcInterface(Integer.parseInt(day),Integer.parseInt(month),Integer.parseInt(year),Double.parseDouble(milesTravelled),Boolean.getBoolean(refuel));
+        String refuelChoice  = JOptionPane.showInputDialog("Did you refuel - 'true' or 'false'");
+        boolean refuel = false;
+        if(refuelChoice.equals("true")){
+            refuel = true;
+        }
+
+        Interfaces.mileageCalcInterface(Integer.parseInt(day),Integer.parseInt(month),Integer.parseInt(year),Double.parseDouble(milesTravelled),refuel);
     }
 }

@@ -270,24 +270,27 @@ public class FileUtilisation {
         }
     }
 
-    public static boolean findInFile(ArrayList<String> searchedItem) {
+    public static boolean findInFile(ArrayList<Integer> searchedItem) {
         try {
             FileReader fr = new FileReader("userData");
             BufferedReader br = new BufferedReader(fr);
             String line = br.readLine();
+            int count = 1; //avoids the first 4 terms in the file
             while (line != null) { //Passes through every line in the file, and when it is found it returns the index where it was found
                 line = br.readLine();
                 if (line == null) { //avoids an error where the line being null clashes with the rest of the code
                 } else {
-                    String[] parts = line.split(", ");
-                    if (parts[2] == null){ //avoids an error if it's not a record
-
-                    }else {
-                        if ((searchedItem.get(0)).equals(parts[0]) && (searchedItem.get(1)).equals(parts[1]) && (searchedItem.get(2)).equals(parts[2])) { //checks to see if the dates line up with the searched dates, meaning the dates act as an identifier
-                            return true;
+                    if (count > 3) {
+                        String[] parts = line.split(", ");
+                        if (parts[2] == null) { //avoids an error if it's not a record
+                        } else {
+                            if (((searchedItem.get(0))==(Double.parseDouble(parts[0]))) && ((searchedItem.get(1))==(Double.parseDouble(parts[1]))) && ((searchedItem.get(2))==(Double.parseDouble(parts[2])))) { //checks to see if the dates line up with the searched dates, meaning the dates act as an identifier
+                                return true;
+                            }
                         }
                     }
                 }
+                count++;
             }
         } catch (IOException e) {
             e.printStackTrace();
