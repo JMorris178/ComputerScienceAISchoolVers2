@@ -172,6 +172,12 @@ public class MileageDiaryGUI extends JPanel implements ActionListener {
         int month = calendar.get((calendar.MONTH));
         month = month+1;
         int year = calendar.get(calendar.YEAR);
+        calendar.add(calendar.DATE,+1000);
+
+        day = calendar.get(calendar.DAY_OF_MONTH);
+        month = calendar.get((calendar.MONTH));
+        month = month+1;
+        year = calendar.get(calendar.YEAR);
 
         System.out.println(day);
         System.out.println(month);
@@ -265,15 +271,24 @@ public class MileageDiaryGUI extends JPanel implements ActionListener {
     }
 
     public void changeMonthAhead(int day, int month, int year){ //changes the month by 1
-        calendar.set(day,month,year); //sets the calendar to the correct month
+        month = month+1;
+        if(month>12) { //if the month is past december, sets the year to the next, and then month to January
+            year = year + 1;
+            month = 1;
+        }
+        System.out.println(day & month & year);
         if (month == 0 || month == 2 || month == 4 || month == 6 || month == 7 || month == 9 || month == 11) {//checks the month and then depending on the current month it will seperate this based on the number of days in the month. This line is for all the months with 31 days
-            calendar.add(calendar.DATE,+31); //sets the calendar to the correct month based on the days in the current month to avoid desync
+            calendar.set(day,month,year);
+            System.out.println("working");//sets the calendar to the correct month based on the days in the current month to avoid desync
         } else if (month == 3 || month == 5 || month == 8 || month == 10) { //30 days
-            calendar.add(calendar.DATE,+30);
+
+            calendar.set(day,month,year);
         } else if (month == 1 && (year % 4) == 0) { //checks to see if the year is a leap year and the month is Febuary to check if it needs 28 or 29 days. Done before the regular febuary check on purpose
-            calendar.add(calendar.DATE,+29);
+
+            calendar.set(day,month,year);
         } else if (month == 1) {//28 days for a normal Febuary
-            calendar.add(calendar.DATE,+28);
+
+            calendar.set(day,month,year);
         }
     }
 
@@ -281,7 +296,7 @@ public class MileageDiaryGUI extends JPanel implements ActionListener {
         month = month-1;
         if(month<1) { //if the month is past december, sets the year to the next, and then month to January
             year = year - 1;
-            month = 1;
+            month = 12;
         }
         System.out.println(day & month & year);
         if (month == 0 || month == 2 || month == 4 || month == 6 || month == 7 || month == 9 || month == 11) {//checks the month and then depending on the current month it will seperate this based on the number of days in the month. This line is for all the months with 31 days
