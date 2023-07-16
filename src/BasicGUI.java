@@ -22,7 +22,7 @@ public class BasicGUI extends JPanel implements ActionListener {
         button1.addActionListener(this);
         add(button1);
 
-        button2 = new JButton("Budgeting sheet");
+        button2 = new JButton("Budgeting Diary");
         button2.setBounds(200, 150, 200, 40);
         button2.addActionListener(this);
         add(button2);
@@ -44,11 +44,12 @@ public class BasicGUI extends JPanel implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         // respond to button clicks
-        System.out.println(e.getActionCommand() + " was clicked");
         if (e.getActionCommand().equals("Mileage Calculator")) { //If the Mileage calculator
             MileageDiaryGUI mGUI = new MileageDiaryGUI(600, 400);
+        }if (e.getActionCommand().equals("Budgeting Diary")) {
+            BudgetDiaryGUI bGUI = new BudgetDiaryGUI(800, 600);
         }if (e.getActionCommand().equals("Settings")) {
-                SettingsGUI sGUI = new SettingsGUI(600, 400);
+                SettingsGUI sGUI = new SettingsGUI(600,400);
         }if (e.getActionCommand().equals("Record Adder")) {
                 RecordAdderGUI rGUI = new RecordAdderGUI(600, 400);
     }

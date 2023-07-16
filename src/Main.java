@@ -24,11 +24,8 @@ public class Main {
             Scanner userInput = new Scanner(System.in);
             int choice = userInput.nextInt();
 
-            if(choice == 3){
-                Interfaces.budgetingSheetInterface(car); //Takes the user to the Budgeting Sheet interface
-            }else{
-                repeat = false; //ends the loop
-            }
+            //Takes the user to the Budgeting Sheet interface
+
         }
 //
     }
