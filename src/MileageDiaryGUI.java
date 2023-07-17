@@ -9,6 +9,7 @@ public class MileageDiaryGUI extends JPanel implements ActionListener {
     ArrayList<JButton> buttons = new ArrayList<>();
     ArrayList<Integer> date = new ArrayList<>();
     Calendar calendar = Calendar.getInstance();
+
     //Creates buttons for the max amount of dates possible in a month
     JButton button1;
     JButton button2;
@@ -62,9 +63,14 @@ public class MileageDiaryGUI extends JPanel implements ActionListener {
         frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         frame.setSize(width, height);
         frame.getContentPane().add(this);
-        date.add(calendar.get(Calendar.DAY_OF_MONTH));
-        date.add(calendar.get(Calendar.MONTH)+1);
-        date.add(calendar.get(Calendar.YEAR));
+        boolean firstTime = true;
+        if (firstTime){ //creates the calendar ONLY for the first time
+            date.add(calendar.get(Calendar.DAY_OF_MONTH));
+            date.add(calendar.get(Calendar.MONTH)+1);
+            date.add(calendar.get(Calendar.YEAR));
+            firstTime = false;
+        }
+
 
 
         frame.setLayout(new GridLayout(5, 7, 25, 25));
@@ -175,11 +181,11 @@ public class MileageDiaryGUI extends JPanel implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         // respond to button clicks
         System.out.println(e.getActionCommand() + "button was clicked");
-        calendar.set(date.get(2),date.get(1),date.get(0));
 
-        int day = calendar.get(calendar.DAY_OF_MONTH);
-        int month = calendar.get((calendar.MONTH));
-        int year = calendar.get(calendar.YEAR);
+
+        int day = date.get(0);
+        int month = date.get(1);
+        int year = date.get(2);
         label.setText(month + " " + year);
         label.setHorizontalAlignment(JLabel.LEFT);
         label.setVerticalTextPosition(JLabel.TOP);

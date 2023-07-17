@@ -88,9 +88,10 @@ public class Interfaces {
         }
     }
 
-    public static String budgetingSheetInterface(Car car,int choice) {
+    public static String budgetingSheetInterface(int choice) {
         Scanner userInput = new Scanner(System.in);
         boolean repeat = true;
+        Car car = Utilisation.constructorSetup();
 
         Calendar calendar = Calendar.getInstance(); //resets the calendar back to the current date to reset any changes made during one of the methods
         ArrayList<String> passer = new ArrayList<>(); //creates a new arraylist to pass data through that isn't the records
@@ -98,7 +99,7 @@ public class Interfaces {
         if (choice == 3) {
             return("Over the past week, you have spent £" + Utilisation.costOverTime(car, calendar, passer));
              //Uses the costOverTime method to calculate the cost
-        } else if (choice == 4) {
+        } else if (choice == 1) {
             System.out.println("Please input a date within the week you would like to look at. (For example, 02-01-2023 for January of 2023");
             System.out.println("Please input the following in numerical form - the date of the month (eg : 02, 20, 30)");
             int day = userInput.nextInt();
