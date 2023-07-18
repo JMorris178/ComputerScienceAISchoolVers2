@@ -1,4 +1,5 @@
 import java.io.*;
+import java.lang.constant.Constable;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -352,6 +353,38 @@ public class FileUtilisation {
             e.printStackTrace();
         }
         return (null);
+    }
+
+    public static Boolean returnFromFileBudget(ArrayList<String> searchedItem, int index) {
+        try {
+            FileReader fr = new FileReader("userData");
+            BufferedReader br = new BufferedReader(fr);
+            int count = 0;
+            boolean found = false;
+            String returnData = "";
+            String line = br.readLine();
+            while (line != null) { //Passes through every line in the file, and when it is found it returns the index where it was found
+                line = br.readLine();
+                if (line == null) { //avoids an error where the line being null clashes with the rest of the code
+                } else {
+                    String[] parts = line.split(", ");
+                    if ((searchedItem.get(0)).equals(parts[0]) && (searchedItem.get(1)).equals(parts[1]) && (searchedItem.get(2)).equals(parts[2])) { //checks to see if the dates line up with the searched dates, meaning the dates act as an identifier
+                        found = true;
+                        int foundAtIndex = count;
+                        if(parts[index].equals("true")){
+                            return(true);
+                        }
+                    }
+                }
+                count++;
+            }
+            return(false);
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return (false);
     }
 
     public static Double readFromFileDouble(int lineNum) { //General code to read stuff from the file. Takes the line number of the line in the file that needs to be read

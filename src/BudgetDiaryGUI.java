@@ -99,7 +99,7 @@ public class BudgetDiaryGUI extends JPanel implements ActionListener {
         add(button10);
 
 
-        button11 = new JButton(Interfaces.budgetingSheetInterface(1)); //Cost week
+        button11 = new JButton(Interfaces.budgetingSheetInterface(1, date.get(0),date.get(1),date.get(2))); //Cost week
         button11.setBounds(600, 100, 150, 40);
         button11.addActionListener(this);
         add(button11);

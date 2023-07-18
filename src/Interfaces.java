@@ -88,7 +88,7 @@ public class Interfaces {
         }
     }
 
-    public static String budgetingSheetInterface(int choice) {
+    public static String budgetingSheetInterface(int choice, int day, int month, int year) {
         Scanner userInput = new Scanner(System.in);
         boolean repeat = true;
         Car car = Utilisation.constructorSetup();
@@ -97,43 +97,12 @@ public class Interfaces {
         ArrayList<String> passer = new ArrayList<>(); //creates a new arraylist to pass data through that isn't the records
         Double total = 0.0;
         if (choice == 3) {
-            return("Over the past week, you have spent £" + Utilisation.costOverTime(car, calendar, passer));
-             //Uses the costOverTime method to calculate the cost
+         //Uses the costOverTime method to calculate the cost
         } else if (choice == 1) {
-            System.out.println("Please input a date within the week you would like to look at. (For example, 02-01-2023 for January of 2023");
-            System.out.println("Please input the following in numerical form - the date of the month (eg : 02, 20, 30)");
-            int day = userInput.nextInt();
-            System.out.println("Please input the following in numerical form - the month (eg : 02, 10, 08)");
-            int month = (userInput.nextInt() - 1);//the months start at 0 so this is done to offset that
-            System.out.println("Please input the following in numerical form - the year (eg : 2023, 1973)");
-            int year = userInput.nextInt();
-            calendar.set(year, month, day);
-            int dayOfTheWeek = calendar.get(calendar.DAY_OF_WEEK);
-            //Sets the day of the week back to the start onc the week that the user wants to see has been found. This will be useful when the GUI is made too
-            if (dayOfTheWeek == 6) { //Saturday
-                calendar.add(Calendar.DATE, -6);//sets it back to Sunday
-                System.out.println("Over this week, you have spent £" + Utilisation.costOverWeek(car, calendar, passer));
-            } else if (dayOfTheWeek == 5) { //Friday
-                calendar.add(Calendar.DATE, -5);//sets it back to Sunday
-                System.out.println("Over this week, you have spent £" + Utilisation.costOverWeek(car, calendar, passer));
-            } else if (dayOfTheWeek == 4) { //Thursday
-                calendar.add(Calendar.DATE, -4);//sets it back to Sunday
-                System.out.println("Over this week, you have spent £" + Utilisation.costOverWeek(car, calendar, passer));
-            } else if (dayOfTheWeek == 3) { //Wednesday
-                calendar.add(Calendar.DATE, -3);//sets it back to Sunday
-                System.out.println("Over this week, you have spent £" + Utilisation.costOverWeek(car, calendar, passer));
-            } else if (dayOfTheWeek == 2) { //Tuesday
-                calendar.add(Calendar.DATE, -2);//sets it back to Sunday
-                System.out.println("Over this week, you have spent £" + Utilisation.costOverWeek(car, calendar, passer));
-            } else if (dayOfTheWeek == 1) { //Monday
-                calendar.add(Calendar.DATE, -1);//sets it back to Sunday
-                System.out.println("Over this week, you have spent £" + Utilisation.costOverWeek(car, calendar, passer));
-            } else if (dayOfTheWeek == 0) { //Sunday
-                System.out.println("Over this week, you have spent £" + Utilisation.costOverWeek(car, calendar, passer));//Already set to Sunday, so not necessary
-            }
+               Utilisation.costOverTime(car, day, month, year, passer);
+
         } else if (choice == 5) {
-            int month = calendar.get(calendar.MONTH);
-            int year = calendar.get(calendar.YEAR);
+
             if (month == 0 || month == 2 || month == 4 || month == 6 || month == 7 || month == 9 || month == 11) {//checks the month and then depending on the current month it will seperate this based on the number of days in the month. This line is for all the months with 31 days
                 System.out.println("Over the past month, you have spent £" + Utilisation.costOverTime(car, calendar, passer, 31));
             } else if (month == 3 || month == 5 || month == 8 || month == 10) { //30 days
@@ -146,11 +115,11 @@ public class Interfaces {
         } else if (choice == 6) {
             System.out.println("Please input a date within the month you would like to look at. (For example, 02-01-2023 for January of 2023");
             System.out.println("Please input the following in numerical form - the date of the month (eg : 02, 20, 30)");
-            int day = userInput.nextInt();
+
             System.out.println("Please input the following in numerical form - the month (eg : 02, 10, 08)");
-            int month = (userInput.nextInt() - 1);//the months start at 0 so this is done to offset that
+            //the months start at 0 so this is done to offset that
             System.out.println("Please input the following in numerical form - the year (eg : 2023, 1973)");
-            int year = userInput.nextInt();
+
             calendar.set(year, month, day);//Sets the calendar to the date inputted, so the program can use a different date so a different month can be viewed
             if (month == 0 || month == 2 || month == 4 || month == 6 || month == 7 || month == 9 || month == 11) {//checks the month and then depending on the current month it will seperate this based on the number of days in the month. This line is for all the months with 31 days
                 System.out.println("Over the past month, you have spent £" + Utilisation.costOverTime(car, calendar, passer, 31));

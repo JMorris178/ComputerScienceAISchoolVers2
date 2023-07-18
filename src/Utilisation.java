@@ -39,24 +39,60 @@ public class Utilisation {
 
     public static boolean refuelCheck(ArrayList<String> passer) { //Checks if a refuel was done by reading the file
         boolean returnValue;
-        if (FileUtilisation.returnFromFile(passer, 6).equals("true")) {
-            returnValue = true;
-        } else {
-            returnValue = false;
+        if (FileUtilisation.returnFromFileBudget(passer, 6) != null) {
+                returnValue = true;
+            }  else {
+                returnValue = false;
+            }
+        return(returnValue);
         }
-        return returnValue;
-    }
 
-    public static Double costOverTime(Car car, Calendar calendar, ArrayList<String> passer) { //Calculates the cost over time
+
+
+    public static Double costOverTime(Car car, int day, int month, int year, ArrayList<String> passer) { //Calculates the cost over time
         Double total = 0.0;
+        int remainder;
         for (int i = 0; i < 7; i++) {
             passer = new ArrayList<>(); //resets Passer at the start of each loop
-            calendar.add(Calendar.DATE, -1);
-            passer.add(String.valueOf((calendar.get(Calendar.DAY_OF_MONTH))));
-            passer.add(String.valueOf((calendar.get(Calendar.MONTH)) + 1));
-            passer.add(String.valueOf(calendar.get(Calendar.YEAR))); //Adds the date to passer so it can be read later
+            day = day-1;
+            //Extra code to avoid logic errors
+            if (month == 0 || month == 2 || month == 4 || month == 6 || month == 7 || month == 9 || month == 11) {//checks the month and then depending on the current month it will seperate this based on the number of days in the month. This line is for all the months with 31 days
+                if (day > 31) {
+                    remainder = day-31;
+                    month = month + 1;
+                    day = remainder;
+                }
+            } else if (month == 3 || month == 5 || month == 8 || month == 10) { //30 days
+                if (day > 30) {
+                    remainder = day-31;
+                    month = month + 1;
+                    day = remainder;
+                }
+            } else if (month == 1 && (year % 4) == 0) { //checks to see if the year is a leap year and the month is Febuary to check if it needs 28 or 29 days. Done before the regular febuary check on purpose
+                if (day > 29) {
+                    remainder = day-31;
+                    month = month + 1;
+                    day = remainder;
+                }
+            } else if (month == 1) {//28 days for a normal Febuary
+
+                if (day > 1) {
+                    remainder = day-31;
+                    month = month + 1;
+                    day = remainder;
+                }
+            }
+
+            if (month > 12) { //if the month is past december, sets the year to the next, and then month to January
+                year = year + 1;
+                month = 1;
+            }
+
+            passer.add(String.valueOf((day)));
+            passer.add(String.valueOf((month) + 1));
+            passer.add(String.valueOf(year)); //Adds the date to passer so it can be read later
             if (Utilisation.refuelCheck(passer)) { //checks if the index at 5 has a value, and if it does it carries out the following as there was a refuel
-                if (FileUtilisation.returnFromFile(passer, 6).equals("true")) { //checks if index 6 is true. If it is then there's a remainder in index 7, which it will then pass through to the cost calculator
+                if (FileUtilisation.returnFromFileBudget(passer, 6).equals("true")) { //checks if index 6 is true. If it is then there's a remainder in index 7, which it will then pass through to the cost calculator
                     Double remainderInTank = Double.valueOf((String) FileUtilisation.returnFromFile(passer, 7)); //Casts the returned value to a string so it can then be converted into a float.
                     if (Utilisation.costCalculator(car) == 0) {
                         total = total + 0;
@@ -70,10 +106,8 @@ public class Utilisation {
                         total = total + Utilisation.costCalculator(car);
                     }
                 }
-
-
             } else {
-                total = total + 0;
+                total = total + Utilisation.costCalculator(car);
             }
         }
         return total;
