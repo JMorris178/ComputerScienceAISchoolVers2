@@ -135,6 +135,7 @@ public class BudgetDiaryGUI extends JPanel implements ActionListener {
         calendar.set(date.get(2), date.get(1), date.get(0)); //updates the calendar
         button5.setText(getWeek(calendar)); //updates the text on the buttons
         button6.setText(getMonth(calendar, date));
+        button11.setText(Interfaces.budgetingSheetInterface(1, date.get(0),date.get(1),date.get(2)));
     }
 
 

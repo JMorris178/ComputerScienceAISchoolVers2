@@ -99,7 +99,12 @@ public class Interfaces {
         if (choice == 3) {
          //Uses the costOverTime method to calculate the cost
         } else if (choice == 1) {
-               Utilisation.costOverTime(car, day, month, year, passer);
+               double returnValue = Utilisation.costOverTime(car, day, month, year, passer);
+               if (returnValue == 0){
+                   return("N/A");
+               }else{
+                   return(Double.toString(returnValue));
+               }
 
         } else if (choice == 5) {
 

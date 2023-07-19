@@ -37,6 +37,12 @@ public class Utilisation {
         return total;
     }
 
+    public static Double costCalculatorPerDay(Car car,  ArrayList<String> passer) { //Calculates the cost of a full refuel
+        int index = FileUtilisation.findLineNum(passer);
+        Double total = car.getPrices() * FileUtilisation.readFromFileDouble(index); //Multiplies the cost per gallon by the capacity of fuel tank to find the cost for a full refuel
+        return total;
+    }
+
     public static boolean refuelCheck(ArrayList<String> passer) { //Checks if a refuel was done by reading the file
         boolean returnValue;
         if (FileUtilisation.returnFromFileBudget(passer, 6) != null) {
@@ -94,7 +100,7 @@ public class Utilisation {
             if (Utilisation.refuelCheck(passer)) { //checks if the index at 5 has a value, and if it does it carries out the following as there was a refuel
                 if (FileUtilisation.returnFromFileBudget(passer, 6).equals("true")) { //checks if index 6 is true. If it is then there's a remainder in index 7, which it will then pass through to the cost calculator
                     Double remainderInTank = Double.valueOf((String) FileUtilisation.returnFromFile(passer, 7)); //Casts the returned value to a string so it can then be converted into a float.
-                    if (Utilisation.costCalculator(car) == 0) {
+                    if (Utilisation.costCalculatorPerDay(car, passer) == 0) {
                         total = total + 0;
                     } else {
                         total = total + Utilisation.costCalculator(car, remainderInTank);
