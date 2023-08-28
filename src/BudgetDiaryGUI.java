@@ -325,5 +325,12 @@ public class BudgetDiaryGUI extends JPanel implements ActionListener {
         }
     return null;
     }
+
+    public void checkMilesMonth(){
+
+    }
+
+
 }
+
 

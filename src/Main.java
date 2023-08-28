@@ -20,7 +20,6 @@ public class Main {
         while (repeat) { //While loop used to repeat the core of the program over and over until
             frame.pack(); // tell window to resize to fit components
             frame.setVisible(true);
-            System.out.println("Hello user. Would you like to go to 1. The Mileage Calculator, or 2. Settings, or 3. The Budgeting Sheet");
             Scanner userInput = new Scanner(System.in);
             int choice = userInput.nextInt();
 

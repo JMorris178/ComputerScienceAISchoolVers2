@@ -21,7 +21,6 @@ public class Interfaces {
         boolean repeat = true;
         Car car = Utilisation.constructorSetup();
 
-        System.out.println("Do you want to 1. Change the distance travelled today, 2. Change the distance travelled on another date, 3. view the data from today or 4, view the data from another day? Type a number out of this range to return to the main menu.");
         //All the necessary variables are defined here so they're reset at the start of each cycle
         ArrayList record = new ArrayList<>();
         ArrayList sortingPasser = new ArrayList<>(); //Passer specifically for sorting
