@@ -279,7 +279,7 @@ public class FileUtilisation {
             int count = 1; //avoids the first 4 terms in the file
             while (line != null) { //Passes through every line in the file, and when it is found it returns the index where it was found
                 line = br.readLine();
-                if (line == null) { //avoids an error where the line being null clashes with the rest of the code
+                if (line == null){//avoids an error where the line being null clashes with the rest of the code
                 } else {
                     if (count > 3) {
                         String[] parts = line.split(", ");

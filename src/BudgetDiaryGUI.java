@@ -105,7 +105,7 @@ public class BudgetDiaryGUI extends JPanel implements ActionListener {
         add(button11);
 
 
-        button12 = new JButton(); //Cost Month
+        button12 = new JButton(Interfaces.budgetingSheetInterface(2, date.get(0),date.get(1),date.get(2))); //Cost Month
         button12.setBounds(600, 300, 150, 40);
         button12.addActionListener(this);
         add(button12);
@@ -136,6 +136,7 @@ public class BudgetDiaryGUI extends JPanel implements ActionListener {
         button5.setText(getWeek(calendar)); //updates the text on the buttons
         button6.setText(getMonth(calendar, date));
         button11.setText(Interfaces.budgetingSheetInterface(1, date.get(0),date.get(1),date.get(2)));
+        button12.setText(Interfaces.budgetingSheetInterface(2, date.get(0),date.get(1),date.get(2)));
     }
 
 
@@ -150,7 +151,7 @@ public class BudgetDiaryGUI extends JPanel implements ActionListener {
             date.set(0, day); //changes the day value to the new updated one
             date.set(1, month);
             date.set(2, year);
-            System.out.println("working");//sets the calendar to the correct month based on the days in the current month to avoid desync
+
         } else if (month == 3 || month == 5 || month == 8 || month == 10) { //30 days
 
             date.set(0, day); //changes the day value to the new updated one
@@ -181,7 +182,7 @@ public class BudgetDiaryGUI extends JPanel implements ActionListener {
             date.set(0, day); //changes the day value to the new updated one
             date.set(1, month);
             date.set(2, year);
-            System.out.println("working");//sets the calendar to the correct month based on the days in the current month to avoid desync
+
         } else if (month == 4 || month == 6 || month == 9 || month == 11) { //30 days
 
             date.set(0, day); //changes the day value to the new updated one

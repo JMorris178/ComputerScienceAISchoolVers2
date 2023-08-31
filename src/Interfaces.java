@@ -28,9 +28,11 @@ public class Interfaces {
         boolean refillRequired = false;
         boolean extraValue = false;
         boolean replaceLines = false;
+        boolean fullRefillRequired = false;
         Double remainderInTank = 0.0;
         Double offset;
         Double originalValue;
+        double cost = 0;
         Double newValue;
         Double overshoot = 0.0;
 
@@ -60,8 +62,11 @@ public class Interfaces {
         car.setFuelTank((car.getFuelTank()) - fuelCon);
         FileUtilisation.replaceLines(1, car.getFuelTank());
         if (car.getFuelTank() <= 0) {
-            refillRequired = true; //sets the refill to true
+            fullRefillRequired = true; //sets the refill to true
+            cost = car.getPrices() * (Math.abs(car.getFuelTank()) + 20);
             Utilisation.carOutOfFuel(car); //resets the fuel capacity, with the remainder taken away
+
+
         } else {
             if (refuel) {
                 remainderInTank = car.getFuelTank(); //sets a value to remainderInTank
@@ -73,11 +78,16 @@ public class Interfaces {
         record.add(miles);
         record.add(fuelCon);
         record.add(refillRequired);
-        if (extraValue == true) { //adds an extra true or false to let the program distinguish a full refuel or partial refuel when records are called.
-            record.add("true");
-            record.add(remainderInTank);
+
+        if (extraValue == true) { //Calculates the cost to then be added
+            record.add(Utilisation.costCalculator(car, remainderInTank));
+
+        }else if (fullRefillRequired){
+                record.add(cost);
+        }else if (refuel){
+            record.add(Utilisation.costCalculator(car));
         } else {
-            record.add("false");
+            record.add(0);
         }
         if (replaceLines) {
             int lineNum = FileUtilisation.findLineNum(passer);
@@ -95,9 +105,9 @@ public class Interfaces {
         Calendar calendar = Calendar.getInstance(); //resets the calendar back to the current date to reset any changes made during one of the methods
         ArrayList<String> passer = new ArrayList<>(); //creates a new arraylist to pass data through that isn't the records
         Double total = 0.0;
-        if (choice == 3) {
+
          //Uses the costOverTime method to calculate the cost
-        } else if (choice == 1) {
+        if (choice == 1) {
                double returnValue = Utilisation.costOverTime(car, day, month, year, passer);
                if (returnValue == 0){
                    return("N/A");
@@ -105,16 +115,16 @@ public class Interfaces {
                    return(Double.toString(returnValue));
                }
 
-        } else if (choice == 5) {
+        } else if (choice == 2) {
 
             if (month == 0 || month == 2 || month == 4 || month == 6 || month == 7 || month == 9 || month == 11) {//checks the month and then depending on the current month it will seperate this based on the number of days in the month. This line is for all the months with 31 days
-                System.out.println("Over the past month, you have spent £" + Utilisation.costOverTime(car, calendar, passer, 31));
+               return(Double.toString(Utilisation.costOverTime(car, calendar, passer, 31)));
             } else if (month == 3 || month == 5 || month == 8 || month == 10) { //30 days
-                System.out.println("Over the past month, you have spent £" + Utilisation.costOverTime(car, calendar, passer, 30));
+                return(Double.toString(Utilisation.costOverTime(car, calendar, passer, 30)));
             } else if (month == 1 && (year % 4) == 0) { //checks to see if the year is a leap year and the month is Febuary to check if it needs 28 or 29 days. Done before the regular febuary check on purpose
-                System.out.println("Over the past month, you have spent £" + Utilisation.costOverTime(car, calendar, passer, 29));
+                return(Double.toString(Utilisation.costOverTime(car, calendar, passer, 29)));
             } else if (month == 1) {//28 days for a normal Febuary
-                System.out.println("Over the past month, you have spent £" + Utilisation.costOverTime(car, calendar, passer, 28));
+                return(Double.toString(Utilisation.costOverTime(car, calendar, passer, 28)));
             }
         } else if (choice == 6) {
             System.out.println("Please input a date within the month you would like to look at. (For example, 02-01-2023 for January of 2023");

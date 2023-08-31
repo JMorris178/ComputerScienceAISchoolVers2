@@ -60,30 +60,30 @@ public class Utilisation {
         int remainder;
         for (int i = 0; i < 7; i++) {
             passer = new ArrayList<>(); //resets Passer at the start of each loop
-            day = day-1;
+            day = day - 1;
             //Extra code to avoid logic errors
             if (month == 0 || month == 2 || month == 4 || month == 6 || month == 7 || month == 9 || month == 11) {//checks the month and then depending on the current month it will seperate this based on the number of days in the month. This line is for all the months with 31 days
                 if (day > 31) {
-                    remainder = day-31;
+                    remainder = day - 31;
                     month = month + 1;
                     day = remainder;
                 }
             } else if (month == 3 || month == 5 || month == 8 || month == 10) { //30 days
                 if (day > 30) {
-                    remainder = day-31;
+                    remainder = day - 31;
                     month = month + 1;
                     day = remainder;
                 }
             } else if (month == 1 && (year % 4) == 0) { //checks to see if the year is a leap year and the month is Febuary to check if it needs 28 or 29 days. Done before the regular febuary check on purpose
                 if (day > 29) {
-                    remainder = day-31;
+                    remainder = day - 31;
                     month = month + 1;
                     day = remainder;
                 }
             } else if (month == 1) {//28 days for a normal Febuary
 
                 if (day > 1) {
-                    remainder = day-31;
+                    remainder = day - 31;
                     month = month + 1;
                     day = remainder;
                 }
@@ -97,30 +97,18 @@ public class Utilisation {
             passer.add(String.valueOf((day)));
             passer.add(String.valueOf((month) + 1));
             passer.add(String.valueOf(year)); //Adds the date to passer so it can be read later
-            if (Utilisation.refuelCheck(passer)) { //checks if the index at 5 has a value, and if it does it carries out the following as there was a refuel
-                if (FileUtilisation.returnFromFileBudget(passer, 6).equals("true")) { //checks if index 6 is true. If it is then there's a remainder in index 7, which it will then pass through to the cost calculator
-                    Double remainderInTank = Double.valueOf((String) FileUtilisation.returnFromFile(passer, 7)); //Casts the returned value to a string so it can then be converted into a float.
-                    if (Utilisation.costCalculatorPerDay(car, passer) == 0) {
-                        total = total + 0;
-                    } else {
-                        total = total + Utilisation.costCalculator(car, remainderInTank);
-                    }
-                } else {
-                    if (Utilisation.costCalculator(car) == 0) {
-                        total = total + 0;
-                    } else {
-                        total = total + Utilisation.costCalculator(car);
-                    }
-                }
-            } else {
-                total = total + Utilisation.costCalculator(car);
+
+            if (Boolean.valueOf((String) FileUtilisation.returnFromFile(passer, 5)) == true) { //checks to see if there was a refill. index 5 will always be there, so it avoids an error where the program looks for a nonexistent 6th integer
+                total = total + Integer.valueOf((String) FileUtilisation.returnFromFile(passer, 6));
             }
+            return total;
         }
         return total;
     }
 
     public static Double costOverTime(Car car, Calendar calendar, ArrayList<String> passer, int repeats) { //Slight variation of the above that uses inputted repeats
         Double total = 0.0;
+        String holder;
         int day = calendar.get(Calendar.DAY_OF_MONTH);
         calendar.add(Calendar.DATE, -(day));//sets the calendar back to the start of the month
         for (int i = 0; i < repeats; i++) {
@@ -130,28 +118,17 @@ public class Utilisation {
             passer.add(String.valueOf((calendar.get(Calendar.DAY_OF_MONTH))));
             passer.add(String.valueOf((calendar.get(Calendar.MONTH)) + 1));
             passer.add(String.valueOf(calendar.get(Calendar.YEAR)));
-            if (Utilisation.refuelCheck(passer)) { //checks if the index at 5 has a value, and if it does it carries out the following as there was a refuel
-                if (FileUtilisation.returnFromFile(passer, 6).equals("true")) { //checks if index 6 is true. If it is then there's a remainder in index 7, which it will then pass through to the cost calculator
-                    Double remainderInTank = Double.valueOf((String) FileUtilisation.returnFromFile(passer, 7)); //Casts the returned value to a string so it can then be converted into a float.
-                    if (Utilisation.costCalculator(car) == 0) {
-                        total = total + 0;
-                    } else {
-                        total = total + Utilisation.costCalculator(car, remainderInTank);
-                    }
-                } else {
-                    if (Utilisation.costCalculator(car) == 0) {
-                        total = total + 0;
-                    } else {
-                        total = total + Utilisation.costCalculator(car);
-                    }
-                }
-
-
+            if (FileUtilisation.returnFromFile(passer,5) == null){
+                total = total + 0;
+            } else if (String.valueOf(FileUtilisation.returnFromFile(passer,5)).equals("true")){
+                holder = ((String) FileUtilisation.returnFromFile(passer,6));
+                holder = holder.replace(",",""); //removes the comma from the number
+                total = total +  Double.parseDouble(holder);
             } else {
                 total = total + 0;
             }
         }
-        return (total);
+        return (Math.round(total * 100.0) / 100.0);
     }
 
     public static Double costOverWeek(Car car, Calendar calendar, ArrayList<String> passer) { //Slight variation for choice=4
