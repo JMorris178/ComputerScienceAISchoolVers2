@@ -204,6 +204,7 @@ public class BudgetDiaryGUI extends JPanel implements ActionListener {
 
     }
 
+    //TODO Change week so that it just shows the previous week from the currently set date.
     public void changeWeekAhead(int day, int month, int year) { //changes the month by 1
         day = day + 7;
         int remainder;
