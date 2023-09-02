@@ -6,16 +6,11 @@ import java.util.ArrayList;
 
 
 public class SettingsGUI extends JPanel implements ActionListener {
-    ArrayList<JButton> buttons = new ArrayList<>();
     JButton button1;
     JButton button2;
     JButton button3;
-    JButton button4;
     private JFrame frame;
 
-    {
-
-    }
 
     public SettingsGUI(int width, int height) {
         frame = new JFrame("Settings");
@@ -47,13 +42,13 @@ public class SettingsGUI extends JPanel implements ActionListener {
         // respond to button clicks
         if (e.getActionCommand().equals("Change MPG")) { //If the Mileage calculator
             String newMPG = JOptionPane.showInputDialog("");
-            Interfaces.settingsInterface(Double.parseDouble(newMPG),0);
+            Logic.settingsLogic(Double.parseDouble(newMPG),0);
         } else if (e.getActionCommand().equals("Change fuel tank capacity")) { //If the Mileage calculator
             String newFTC = JOptionPane.showInputDialog("");
-            Interfaces.settingsInterface(Double.parseDouble(newFTC),1);
+            Logic.settingsLogic(Double.parseDouble(newFTC),1);
         } else if (e.getActionCommand().equals("Change fuel cost")) { //If the Mileage calculator
             String newFC = JOptionPane.showInputDialog("");
-            Interfaces.settingsInterface(Double.parseDouble(newFC),2);
+            Logic.settingsLogic(Double.parseDouble(newFC),2);
         }
 
 

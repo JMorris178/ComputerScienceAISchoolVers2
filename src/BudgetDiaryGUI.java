@@ -2,14 +2,12 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Calendar;
 
 public class BudgetDiaryGUI extends JPanel implements ActionListener {
     private JFrame frame;
-    JButton button1;
-    JButton button2;
+
     JButton button3;
     JButton button4;
     JButton button5;
@@ -44,15 +42,7 @@ public class BudgetDiaryGUI extends JPanel implements ActionListener {
         }
 
 
-        button1 = new JButton("<---");
-        button1.setBounds(75, 100, 75, 40);
-        button1.addActionListener(this);
-        add(button1);
 
-        button2 = new JButton("--->");
-        button2.setBounds(300, 100, 75, 40);
-        button2.addActionListener(this);
-        add(button2);
 
         button3 = new JButton("<----"); //One more dash in order to differentiate it from the other two
         button3.setBounds(75, 300, 75, 40);
@@ -64,12 +54,12 @@ public class BudgetDiaryGUI extends JPanel implements ActionListener {
         button4.addActionListener(this);
         add(button4);
 
-        button5 = new JButton(getWeek(calendar));
+        button5 = new JButton("Current week");
         button5.setBounds(150, 100, 150, 40);
         button5.addActionListener(this);
         add(button5);
 
-        button6 = new JButton(getMonth(calendar, date));
+        button6 = new JButton(getMonth(date));
         button6.setBounds(150, 300, 150, 40);
         button6.addActionListener(this);
         add(button6);
@@ -88,24 +78,24 @@ public class BudgetDiaryGUI extends JPanel implements ActionListener {
         button8.addActionListener(this);
         add(button8);
 
-        button9 = new JButton(); //miles travelled week
+        button9 = new JButton(Logic.budgetingSheetLogic(0, date.get(0),date.get(1),date.get(2))); //miles travelled week
         button9.setBounds(400, 100, 150, 40);
         button9.addActionListener(this);
         add(button9);
 
-        button10 = new JButton(); //miles travelled month
+        button10 = new JButton(Logic.budgetingSheetLogic(3, date.get(0),date.get(1),date.get(2))); //miles travelled month
         button10.setBounds(400, 300, 150, 40);
         button10.addActionListener(this);
         add(button10);
 
 
-        button11 = new JButton(Interfaces.budgetingSheetInterface(1, date.get(0),date.get(1),date.get(2))); //Cost week
+        button11 = new JButton(Logic.budgetingSheetLogic(1, date.get(0),date.get(1),date.get(2))); //Cost week
         button11.setBounds(600, 100, 150, 40);
         button11.addActionListener(this);
         add(button11);
 
 
-        button12 = new JButton(Interfaces.budgetingSheetInterface(2, date.get(0),date.get(1),date.get(2))); //Cost Month
+        button12 = new JButton(Logic.budgetingSheetLogic(2, date.get(0),date.get(1),date.get(2))); //Cost Month
         button12.setBounds(600, 300, 150, 40);
         button12.addActionListener(this);
         add(button12);
@@ -133,10 +123,9 @@ public class BudgetDiaryGUI extends JPanel implements ActionListener {
         }
 
         calendar.set(date.get(2), date.get(1), date.get(0)); //updates the calendar
-        button5.setText(getWeek(calendar)); //updates the text on the buttons
-        button6.setText(getMonth(calendar, date));
-        button11.setText(Interfaces.budgetingSheetInterface(1, date.get(0),date.get(1),date.get(2)));
-        button12.setText(Interfaces.budgetingSheetInterface(2, date.get(0),date.get(1),date.get(2)));
+        button6.setText(getMonth(date));
+        button12.setText(Logic.budgetingSheetLogic(2, date.get(0),date.get(1),date.get(2)));
+        button10.setText(Logic.budgetingSheetLogic(3, date.get(0),date.get(1),date.get(2)));
     }
 
 
@@ -146,7 +135,6 @@ public class BudgetDiaryGUI extends JPanel implements ActionListener {
             year = year + 1;
             month = 0;
         }
-        System.out.println(day & month & year);
         if (month == 0 || month == 2 || month == 4 || month == 6 || month == 7 || month == 9 || month == 11) {//checks the month and then depending on the current month it will seperate this based on the number of days in the month. This line is for all the months with 31 days
             date.set(0, day); //changes the day value to the new updated one
             date.set(1, month);
@@ -272,31 +260,33 @@ public class BudgetDiaryGUI extends JPanel implements ActionListener {
 
     }
 
-    public String getMonth(Calendar calendar, ArrayList<Integer> date) {
-        if (calendar.get(Calendar.MONTH) == 0) {
+    public String getMonth(ArrayList<Integer> date) {
+        if (date.get(1) == 1) {
             return ("January " + date.get(2));
-        } else if (calendar.get(Calendar.MONTH) == 1) {
+        } else if (date.get(1) == 2) {
             return ("February " + date.get(2));
-        } else if (calendar.get(Calendar.MONTH) == 2) {
+        } else if (date.get(1) == 3) {
             return ("March " + date.get(2));
-        } else if (calendar.get(Calendar.MONTH) == 3) {
+        } else if (date.get(1) == 4) {
             return ("April " + date.get(2));
-        } else if (calendar.get(Calendar.MONTH) == 4) {
+        } else if (date.get(1) == 5) {
             return ("May "+ date.get(2));
-        } else if (calendar.get(Calendar.MONTH) == 5) {
+        } else if (date.get(1) == 6) {
             return ("June "+ date.get(2));
-        } else if (calendar.get(Calendar.MONTH) == 6) {
+        } else if (date.get(1)== 7) {
             return ("July "+ date.get(2));
-        } else if (calendar.get(Calendar.MONTH) == 7) {
+        } else if (date.get(1)== 8) {
             return ("August "+ date.get(2));
-        } else if (calendar.get(Calendar.MONTH) == 8) {
+        } else if (date.get(1) == 9) {
             return ("September "+ date.get(2));
-        } else if (calendar.get(Calendar.MONTH) == 9) {
+        } else if (date.get(1) == 10) {
             return ("October "+ date.get(2));
-        } else if (calendar.get(Calendar.MONTH) == 10) {
+        } else if (date.get(1) == 11) {
             return ("November "+ date.get(2));
-        } else if (calendar.get(Calendar.MONTH) == 11) {
-            return ("December "+ date.get(2));
+        } else if (date.get(1) == 0) {
+            return ("December " + (date.get(2)-1));
+        }  else if (date.get(1) == 12) {
+            return ("December " + (date.get(2)));
         }
         return (null);
     }
@@ -326,10 +316,6 @@ public class BudgetDiaryGUI extends JPanel implements ActionListener {
             return ("Week starting " + calendar.get(calendar.DATE));
         }
     return null;
-    }
-
-    public void checkMilesMonth(){
-
     }
 
 

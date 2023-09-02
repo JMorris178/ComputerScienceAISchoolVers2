@@ -17,6 +17,6 @@ public class RecordAdderGUI {
             refuel = true;
         }
 
-        Interfaces.mileageCalcInterface(Integer.parseInt(day),Integer.parseInt(month),Integer.parseInt(year),Double.parseDouble(milesTravelled),refuel);
+        Logic.mileageCalcLogic(Integer.parseInt(day),Integer.parseInt(month),Integer.parseInt(year),Double.parseDouble(milesTravelled),refuel);
     }
 }
