@@ -1,5 +1,5 @@
 import java.io.*;
-import java.lang.constant.Constable;
+
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -77,111 +77,6 @@ public class FileUtilisation {
             while ((line = file.readLine()) != null) {
                 if (count == lineNum) {
                     line = replacementLine.toString();
-                    inputBuffer.append(line);
-                    inputBuffer.append('\n');
-                } else {
-                    line = readFromFile(count).toString(); // Finds the original line in the original file then copies it.
-                    inputBuffer.append(line);
-                    inputBuffer.append('\n');
-                }
-                count++;
-            }
-            file.close();
-
-            // write the new string with the replaced line OVER the same file
-            FileOutputStream fileOut = new FileOutputStream("userData");
-            fileOut.write(inputBuffer.toString().getBytes());
-            fileOut.close();
-        } catch (Exception e) {
-            System.out.println("Problem reading file.");
-        }
-    }
-
-    public static void InsertLines(int lineNum, Object replacementLine) { //Inserts the inputted line where another line once was
-        try {
-            // input the (modified) file content to the StringBuffer "input"
-            BufferedReader file = new BufferedReader(new FileReader("userData"));
-            StringBuffer inputBuffer = new StringBuffer();
-            String line;
-            String passer = "";
-            boolean offset = false;
-            int count = 0;
-            while ((line = file.readLine()) != null) {
-                if (count == lineNum) {
-                    passer = line;
-                    offset = true;
-                    line = replacementLine.toString();
-                    inputBuffer.append(line);
-                    inputBuffer.append('\n');
-                } else if (count == lineNum + 1) {
-                    line = passer;
-                    inputBuffer.append(line);
-                    inputBuffer.append('\n');
-                } else if (offset = true) {
-                    line = readFromFile(count - 1).toString(); // Finds the original line on the original position.
-                    inputBuffer.append(line);
-                    inputBuffer.append('\n');
-                } else {
-                    line = readFromFile(count).toString(); // Finds the original line in the original file then copies it.
-                    inputBuffer.append(line);
-                    inputBuffer.append('\n');
-                }
-                count++;
-            }
-            file.close();
-
-            // write the new string with the replaced line OVER the same file
-            FileOutputStream fileOut = new FileOutputStream("userData");
-            fileOut.write(inputBuffer.toString().getBytes());
-            fileOut.close();
-        } catch (Exception e) {
-            System.out.println("Problem reading file.");
-        }
-    }
-
-
-    public static void fileSorter() { //sorts the lines into an array list in order so that the new file can be created.
-        try {
-            BufferedReader file = new BufferedReader(new FileReader("userData"));
-            StringBuffer inputBuffer = new StringBuffer();
-            ArrayList passer = new ArrayList();
-            String line;
-            boolean offset = false;
-            int count = 0;
-            while ((line = file.readLine()) != null) {
-
-            }
-        } catch (Exception e) {
-            System.out.println("Problem reading file.");
-        }
-
-    }
-
-    public static void sortedFile(int lineNum, Object replacementLine) { //Creates a new file and then copies lines from the original file into this new file in the sorted order
-        //Needs the list to be sorted
-        try {
-            // Creates the new file
-
-            //Places the sorted records into the new file.
-            BufferedReader file = new BufferedReader(new FileReader("userData"));
-            StringBuffer inputBuffer = new StringBuffer();
-            String line;
-            String passer = "";
-            boolean offset = false;
-            int count = 0;
-            while ((line = file.readLine()) != null) {
-                if (count == lineNum) {
-                    passer = line;
-                    offset = true;
-                    line = replacementLine.toString();
-                    inputBuffer.append(line);
-                    inputBuffer.append('\n');
-                } else if (count == lineNum + 1) {
-                    line = passer;
-                    inputBuffer.append(line);
-                    inputBuffer.append('\n');
-                } else if (offset = true) {
-                    line = readFromFile(count - 1).toString(); // Finds the original line on the original position.
                     inputBuffer.append(line);
                     inputBuffer.append('\n');
                 } else {
@@ -355,37 +250,7 @@ public class FileUtilisation {
         return (null);
     }
 
-    public static Boolean returnFromFileBudget(ArrayList<String> searchedItem, int index) {
-        try {
-            FileReader fr = new FileReader("userData");
-            BufferedReader br = new BufferedReader(fr);
-            int count = 0;
-            boolean found = false;
-            String returnData = "";
-            String line = br.readLine();
-            while (line != null) { //Passes through every line in the file, and when it is found it returns the index where it was found
-                line = br.readLine();
-                if (line == null) { //avoids an error where the line being null clashes with the rest of the code
-                } else {
-                    String[] parts = line.split(", ");
-                    if ((searchedItem.get(0)).equals(parts[0]) && (searchedItem.get(1)).equals(parts[1]) && (searchedItem.get(2)).equals(parts[2])) { //checks to see if the dates line up with the searched dates, meaning the dates act as an identifier
-                        found = true;
-                        int foundAtIndex = count;
-                        if(parts[index].equals("true")){
-                            return(true);
-                        }
-                    }
-                }
-                count++;
-            }
-            return(false);
 
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return (false);
-    }
 
     public static Double readFromFileDouble(int lineNum) { //General code to read stuff from the file. Takes the line number of the line in the file that needs to be read
         try {

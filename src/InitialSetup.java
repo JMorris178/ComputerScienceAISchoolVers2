@@ -3,7 +3,6 @@ import java.io.IOException;
 import java.util.Scanner;
 import java.util.ArrayList;
 
-import static java.lang.Float.parseFloat;
 
 public class InitialSetup { //Checks to see if a file exists, but if it doesn't it runs a setup process to make sure the program works.
     public static void createNewFile(Car car){
