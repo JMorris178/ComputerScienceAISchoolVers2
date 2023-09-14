@@ -33,7 +33,7 @@ public class InitialSetup { //Checks to see if a file exists, but if it doesn't 
             } else {
                 System.out.println("File exists"); //If the file exists.
             }
-            //Now the file is set up (or it already exists), the different settings are saved to the constructor which have been saved in the file
+            //different settings are saved to the constructor which have been saved in the file
             String tempPassMPG = String.valueOf(FileUtilisation.readFromFileDouble(0));
             String tempPassFuelTank = String.valueOf(FileUtilisation.readFromFileDouble(1));
             String tempPassFuelCost = String.valueOf(FileUtilisation.readFromFileDouble(2));
