@@ -7,6 +7,7 @@ import java.util.ArrayList;
 public class InitialSetup { //Checks to see if a file exists, but if it doesn't it runs a setup process to make sure the program works.
     public static void createNewFile(Car car){
         Scanner input = new Scanner(System.in);
+        ArrayList tempRecord = new ArrayList<>();
         ArrayList<Double> tempToAddToFile = new ArrayList<>(); //allows the program to push the settings data to the file if needed
         try {
             File fileCreate = new File("userData");
@@ -26,7 +27,8 @@ public class InitialSetup { //Checks to see if a file exists, but if it doesn't 
                     Object x = tempToAddToFile.get(i);
                     FileUtilisation.addToFile(x);
                 }
-                FileUtilisation.addToFile(tempFuelTank); //adds a copy of the fuel tank as a max - so it will return to this if it runs out
+                FileUtilisation.addToFile(tempFuelTank); //adds a copy of the fuel tank as a max
+                // - so it will return to this if it runs out
 
             } else {
                 System.out.println("File exists"); //If the file exists.
@@ -40,6 +42,15 @@ public class InitialSetup { //Checks to see if a file exists, but if it doesn't 
             car.setFuelTank(Double.parseDouble(tempPassFuelTank));
             car.setPrices(Double.parseDouble(tempPassFuelCost));
             car.setMaxCap(Double.parseDouble(tempPassMaxCap));
+            //Now on restart it will add a placeholder date at the start to avoid an error
+            tempRecord.add(1);
+            tempRecord.add(1);
+            tempRecord.add(1);
+            tempRecord.add(0);
+            tempRecord.add(0);
+            tempRecord.add("false");
+            tempRecord.add(0);
+            FileUtilisation.addToFile(tempRecord);
 
         } catch (IOException e) {
             e.printStackTrace();

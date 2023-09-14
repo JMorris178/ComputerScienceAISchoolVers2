@@ -49,7 +49,8 @@ public class FileUtilisation {
         return (0);
     }
 
-    public static Object readFromFile(int lineNum) { //General code to read stuff from the file. Takes the line number of the line in the file that needs to be read
+    public static Object readFromFile(int lineNum) { //General code to read stuff from the file.
+        // Takes the line number of the line in the file that needs to be read
         int n = lineNum; // The line number
         String line;
         try (Stream<String> lines = Files.lines(Paths.get("userData"))) {
@@ -59,8 +60,6 @@ public class FileUtilisation {
             System.out.println(e);
         }
         return (0);
-
-
     }
 
 
