@@ -54,10 +54,7 @@ public class BudgetDiaryGUI extends JPanel implements ActionListener {
         button4.addActionListener(this);
         add(button4);
 
-        button5 = new JButton("Current week");
-        button5.setBounds(150, 100, 150, 40);
-        button5.addActionListener(this);
-        add(button5);
+
 
         button6 = new JButton(getMonth(date));
         button6.setBounds(150, 300, 150, 40);
@@ -78,21 +75,11 @@ public class BudgetDiaryGUI extends JPanel implements ActionListener {
         button8.addActionListener(this);
         add(button8);
 
-        button9 = new JButton(Logic.budgetingSheetLogic(0, date.get(0),date.get(1),date.get(2))); //miles travelled week
-        button9.setBounds(400, 100, 150, 40);
-        button9.addActionListener(this);
-        add(button9);
 
         button10 = new JButton(Logic.budgetingSheetLogic(3, date.get(0),date.get(1),date.get(2))); //miles travelled month
         button10.setBounds(400, 300, 150, 40);
         button10.addActionListener(this);
         add(button10);
-
-
-        button11 = new JButton(Logic.budgetingSheetLogic(1, date.get(0),date.get(1),date.get(2))); //Cost week
-        button11.setBounds(600, 100, 150, 40);
-        button11.addActionListener(this);
-        add(button11);
 
 
         button12 = new JButton(Logic.budgetingSheetLogic(2, date.get(0),date.get(1),date.get(2))); //Cost Month

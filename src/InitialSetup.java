@@ -1,3 +1,4 @@
+import javax.swing.*;
 import java.io.File;
 import java.io.IOException;
 import java.util.Scanner;
@@ -12,14 +13,16 @@ public class InitialSetup { //Checks to see if a file exists, but if it doesn't 
         try {
             File fileCreate = new File("userData");
             if (fileCreate.createNewFile()) { //If the file doesn't exist
+
                 System.out.println("File created: " + fileCreate.getName());
                 System.out.println("Since this is the first time you are using this, please input some basic data for this program to function");
-                System.out.println("What is your cars MPG?");
-                Double tempMPG = input.nextDouble();
-                System.out.println("What is your fuel tanks max capacity?");
-                Double tempFuelTank = input.nextDouble();
-                System.out.println("What is the current cost of fuel?");
-                Double tempFuelCost = input.nextDouble();
+                String MPG = JOptionPane.showInputDialog("What is your cars MPG?");
+                Double tempMPG = Double. parseDouble(MPG);
+                System.out.println();
+                String FuelTank = JOptionPane.showInputDialog("What is your fuel tanks max capacity?");
+                Double tempFuelTank =  Double. parseDouble(FuelTank);
+                String Cost = JOptionPane.showInputDialog("What is the current cost of fuel?");
+                Double tempFuelCost = Double. parseDouble(Cost);
                 tempToAddToFile.add(tempMPG); //adds these to the file.
                 tempToAddToFile.add(tempFuelTank);
                 tempToAddToFile.add(tempFuelCost);
